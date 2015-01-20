@@ -14,15 +14,18 @@
                <children>
                   <TableView id="med_medTable" fx:id="medidasTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="nombreColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="384.0" text="Nombre" />
-                        <TableColumn fx:id="abreviaturaColumn" maxWidth="396.0" minWidth="-1.0" prefWidth="396.0" text="Abreviatura" />
+                        <TableColumn fx:id="nombreColumn" prefWidth="75.0" text="Nombre" />
+                        <TableColumn fx:id="abreviaturaColumn" prefWidth="75.0" text="Abreviatura" />
                      </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                </children>
             </AnchorPane>
          </center>
          <top>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="5.0" BorderPane.alignment="CENTER">
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Nombre" />
                   <TextField id="med_nameText" fx:id="nombreText" />

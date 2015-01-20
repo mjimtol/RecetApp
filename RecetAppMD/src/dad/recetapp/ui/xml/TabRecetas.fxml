@@ -14,9 +14,15 @@
                <children>
                   <TableView id="recetasTableView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
+                        <TableColumn prefWidth="75.0" text="Nombre" />
+                        <TableColumn prefWidth="75.0" text="Para" />
+                        <TableColumn prefWidth="75.0" text="Tiempo Total" />
+                        <TableColumn prefWidth="75.0" text="Fecha creacion" />
+                        <TableColumn prefWidth="75.0" text="Categoria" />
                      </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                </children>
             </AnchorPane>
