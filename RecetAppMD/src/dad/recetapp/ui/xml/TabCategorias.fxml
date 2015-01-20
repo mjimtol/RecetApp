@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.ui.xml.TabCategoriasController">
+   <children>
+      <BorderPane prefHeight="555.0" prefWidth="806.0">
+         <center>
+            <ScrollPane prefHeight="33.0" prefViewportHeight="511.0" prefViewportWidth="806.0" prefWidth="806.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="803.0">
+                     <children>
+                        <TableView fx:id="categoriasTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="descripcionColumn" prefWidth="802.0" text="Descripcion" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+         <top>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="44.0" prefWidth="782.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Descripción: " />
+                  <TextField fx:id="cat_descText" />
+                  <Button id="cat_addButton" mnemonicParsing="false" onAction="#anadir" text="Añadir" />
+                  <Button id="cat_deleteButton" mnemonicParsing="false" onAction="#eliminar" text="Eliminar" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </FlowPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

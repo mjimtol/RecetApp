@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <BorderPane layoutX="24.0" layoutY="24.0" prefHeight="531.0" prefWidth="782.0">
+         <center>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="782.0">
+                     <children>
+                        <TableView id="anotacionesTable" prefHeight="470.0" prefWidth="782.0">
+                           <columns>
+                              <TableColumn prefWidth="781.0" text="C1" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+         <top>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="44.0" prefWidth="782.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Descripción" />
+                  <TextField id="an_descText" />
+                  <Button id="ing_addButton" mnemonicParsing="false" text="Añadir" />
+                  <Button id="ing_deleteButton" mnemonicParsing="false" text="Eliminar" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </FlowPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
