@@ -15,7 +15,7 @@ public class ServiceLocator {
 	private static final ICategoriasService categoriasService = new CategoriasService();
 	private static final ITiposAnotacionesService tiposAnotacionesService = new TipoAnotacionService();
 	
-	private ServiceLocator() {}
+	public ServiceLocator() {}
 
 	public static IRecetasService getIRecetasService(){
 		return recetasService;
