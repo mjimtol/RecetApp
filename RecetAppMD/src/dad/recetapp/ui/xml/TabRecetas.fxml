@@ -10,23 +10,19 @@
    <center>
       <BorderPane prefHeight="171.0" prefWidth="714.0" BorderPane.alignment="CENTER">
          <center>
-            <ScrollPane BorderPane.alignment="CENTER">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <TableView id="recetasTableView" prefHeight="476.0" prefWidth="712.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
+            <AnchorPane>
+               <children>
+                  <TableView id="recetasTableView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn prefWidth="75.0" text="C2" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
          </center>
          <top>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="53.0" prefWidth="516.0" prefWrapLength="200.0" BorderPane.alignment="CENTER">
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="5.0" prefWrapLength="200.0" vgap="5.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Nombre: " />
                   <TextField id="nombreTxt" prefHeight="25.0" prefWidth="131.0" />
@@ -38,12 +34,15 @@
                   <Label text="Categoría: " />
                   <ComboBox prefHeight="25.0" prefWidth="106.0" />
                </children>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </BorderPane.margin>
             </FlowPane>
          </top>
       </BorderPane>
    </center>
    <right>
-      <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="346.0" prefWidth="84.0" vgap="10.0" BorderPane.alignment="CENTER">
+      <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="346.0" prefWidth="84.0" vgap="5.0" BorderPane.alignment="CENTER">
          <children>
             <Button id="addButton" fx:id="handleAddButton" mnemonicParsing="false" onAction="#nuevaReceta" prefHeight="25.0" prefWidth="75.0" text="Añadir" textAlignment="CENTER">
                <FlowPane.margin>
@@ -62,7 +61,7 @@
             </Button>
          </children>
          <padding>
-            <Insets top="15.0" />
+            <Insets top="5.0" />
          </padding>
          <BorderPane.margin>
             <Insets />

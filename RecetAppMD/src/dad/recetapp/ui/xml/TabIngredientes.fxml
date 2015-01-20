@@ -6,27 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane layoutX="24.0" layoutY="24.0" prefHeight="531.0" prefWidth="782.0">
+      <BorderPane layoutX="24.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="782.0">
-                     <children>
-                        <TableView id="ingredientesTable" prefHeight="470.0" prefWidth="782.0">
-                           <columns>
-                              <TableColumn prefWidth="781.0" text="C1" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
+            <AnchorPane>
+               <children>
+                  <TableView id="ingredientesTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Nombre" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
          </center>
          <top>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="44.0" prefWidth="782.0" BorderPane.alignment="CENTER">
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="5.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Nombre" />
                   <TextField id="ing_nameText" />
@@ -37,7 +32,7 @@
                   <Insets />
                </opaqueInsets>
                <BorderPane.margin>
-                  <Insets />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
             </FlowPane>
          </top>

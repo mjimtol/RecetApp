@@ -8,25 +8,21 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.ui.xml.TabMedidasController">
    <children>
-      <BorderPane layoutX="24.0" layoutY="24.0" prefHeight="531.0" prefWidth="782.0">
+      <BorderPane layoutX="24.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="782.0">
-                     <children>
-                        <TableView id="med_medTable" fx:id="medidasTable" prefHeight="470.0" prefWidth="782.0">
-                           <columns>
-                              <TableColumn fx:id="nombreColumn" prefWidth="384.0" text="Nombre" />
-                              <TableColumn fx:id="abreviaturaColumn" prefWidth="397.0" text="Abreviatura" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="782.0">
+               <children>
+                  <TableView id="med_medTable" fx:id="medidasTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn fx:id="nombreColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="384.0" text="Nombre" />
+                        <TableColumn fx:id="abreviaturaColumn" maxWidth="396.0" minWidth="-1.0" prefWidth="396.0" text="Abreviatura" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
          </center>
          <top>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="44.0" prefWidth="782.0" BorderPane.alignment="CENTER">
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="5.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Nombre" />
                   <TextField id="med_nameText" fx:id="nombreText" />
@@ -39,7 +35,7 @@
                   <Insets />
                </opaqueInsets>
                <BorderPane.margin>
-                  <Insets />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
             </FlowPane>
          </top>

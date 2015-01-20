@@ -8,24 +8,20 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.ui.xml.TabCategoriasController">
    <children>
-      <BorderPane prefHeight="555.0" prefWidth="806.0">
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <ScrollPane prefHeight="33.0" prefViewportHeight="511.0" prefViewportWidth="806.0" prefWidth="806.0">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="803.0">
-                     <children>
-                        <TableView fx:id="categoriasTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn fx:id="descripcionColumn" prefWidth="802.0" text="Descripcion" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
+            <AnchorPane>
+               <children>
+                  <TableView fx:id="categoriasTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn fx:id="descripcionColumn" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Descripcion" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
          </center>
          <top>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="44.0" prefWidth="782.0" BorderPane.alignment="CENTER">
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="5.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Descripción: " />
                   <TextField fx:id="cat_descText" />
@@ -36,7 +32,7 @@
                   <Insets />
                </opaqueInsets>
                <BorderPane.margin>
-                  <Insets />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
             </FlowPane>
          </top>
