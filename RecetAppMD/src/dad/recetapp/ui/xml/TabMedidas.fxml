@@ -31,8 +31,8 @@
                   <TextField id="med_nameText" fx:id="nombreText" />
                   <Label text="Abreviatura" />
                   <TextField id="med_abrText" fx:id="abrevText" />
-                  <Button id="ing_addButton" mnemonicParsing="false" text="Añadir" />
-                  <Button id="ing_deleteButton" mnemonicParsing="false" text="Eliminar" />
+                  <Button id="ing_addButton" mnemonicParsing="false" onAction="#anadir" text="Añadir" />
+                  <Button id="ing_deleteButton" mnemonicParsing="false" onAction="#eliminar" text="Eliminar" />
                </children>
                <opaqueInsets>
                   <Insets />

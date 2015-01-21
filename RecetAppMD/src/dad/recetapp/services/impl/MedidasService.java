@@ -11,7 +11,7 @@ import dad.recetapp.db.DataBase;
 import dad.recetapp.services.ICategoriasService;
 import dad.recetapp.services.IMedidasService;
 import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.items.CategoriaItem;
+import dad.recetapp.services.items.TipoAnotacionesItem;
 import dad.recetapp.services.items.MedidaItem;
 
 public class MedidasService implements IMedidasService{
@@ -23,7 +23,7 @@ public class MedidasService implements IMedidasService{
 				throw new ServiceException("Error al crear la medida: debe rellenar todos los datos");
 			}			
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("insert into medida (nombre,abreviatura) values (?,?)");
+			PreparedStatement statement = conn.prepareStatement("insert into medidas (nombre,abreviatura) values (?,?)");
 			statement.setString(1, medida.getAbreviatura());
 			statement.setString(2, medida.getNombre());
 			statement.executeUpdate();
