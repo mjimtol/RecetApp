@@ -13,7 +13,7 @@ import dad.recetapp.db.DataBase;
 import dad.recetapp.services.IRecetasService;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.items.AnotacionItem;
-import dad.recetapp.services.items.TipoAnotacionesItem;
+import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.IngredienteItem;
 import dad.recetapp.services.items.InstruccionItem;
 import dad.recetapp.services.items.MedidaItem;
@@ -224,7 +224,7 @@ public class RecetasService implements IRecetasService {
 				receta.setFechaCreacion(rs.getDate("fecha_creacion"));
 				receta.setTiempoTotal(rs.getInt("tiempo_total"));
 				receta.setTiempoThermomix(rs.getInt("tiempo_thermomix"));
-				receta.setCategoria(new TipoAnotacionesItem());
+				receta.setCategoria(new CategoriaItem());
 				receta.getCategoria().setId(rs.getLong("id_categoria"));
 				receta.getCategoria().setDescripcion(rs.getString("categoria"));
 				receta.getAnotaciones().addAll(listarAnotaciones(id));

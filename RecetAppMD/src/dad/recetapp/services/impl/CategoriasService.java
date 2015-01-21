@@ -10,7 +10,7 @@ import java.util.List;
 import dad.recetapp.db.DataBase;
 import dad.recetapp.services.ICategoriasService;
 import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.items.TipoAnotacionesItem;
+import dad.recetapp.services.items.CategoriaItem;
 
 public class CategoriasService implements ICategoriasService {
 
@@ -18,7 +18,7 @@ public class CategoriasService implements ICategoriasService {
 	}
 
 	@Override
-	public void crearCategoria(TipoAnotacionesItem categoria) throws ServiceException {
+	public void crearCategoria(CategoriaItem categoria) throws ServiceException {
 		try {
 			if (categoria == null || categoria.getDescripcion() == null) {
 				throw new ServiceException("Error al crear la categoría: debe especificar la categoría");
@@ -36,7 +36,7 @@ public class CategoriasService implements ICategoriasService {
 	}
 
 	@Override
-	public void modificarCategoria(TipoAnotacionesItem categoria) throws ServiceException {
+	public void modificarCategoria(CategoriaItem categoria) throws ServiceException {
 		try{
 			if (categoria.getId() == null) {
 				throw new ServiceException("Error al recuperar la categoría: Debe especificar el identificador");
@@ -69,16 +69,16 @@ public class CategoriasService implements ICategoriasService {
 	}
 
 	@Override
-	public List<TipoAnotacionesItem> listarCategorias() throws ServiceException {
-		List<TipoAnotacionesItem> listcategoria = new ArrayList<TipoAnotacionesItem>();
-		TipoAnotacionesItem categoria = null;
+	public List<CategoriaItem> listarCategorias() throws ServiceException {
+		List<CategoriaItem> listcategoria = new ArrayList<CategoriaItem>();
+		CategoriaItem categoria = null;
 		try {
 			Connection conn = DataBase.getConnection();
 			PreparedStatement statement = conn.prepareStatement("select id,descripcion from categorias");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				categoria = new TipoAnotacionesItem();
-				categoria.setId(rs.getLong("id"));
+				categoria = new CategoriaItem();
+				categoria.setId(rs.getLong("id")); // categoria.setId(id);
 				categoria.setDescripcion(rs.getString("descripcion"));
 				listcategoria.add(categoria);
 			}
@@ -90,8 +90,8 @@ public class CategoriasService implements ICategoriasService {
 	}
 
 	@Override
-	public TipoAnotacionesItem obtenerCategoria(Long id) throws ServiceException {
-		TipoAnotacionesItem categoria = null;
+	public CategoriaItem obtenerCategoria(Long id) throws ServiceException {
+		CategoriaItem categoria = null;
 		try {
 			if (id == null) {
 				throw new ServiceException("Error al recuperar la categoría: Debe especificar el identificador");
@@ -101,8 +101,8 @@ public class CategoriasService implements ICategoriasService {
 			statement.setLong(1, id);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
-				categoria = new TipoAnotacionesItem();
-				categoria.setId(rs.getLong("id"));
+				categoria = new CategoriaItem();
+				categoria.setId(rs.getLong("id")); // categoria.setId(id);
 				categoria.setDescripcion(rs.getString("descripcion"));
 			}
 			statement.close();

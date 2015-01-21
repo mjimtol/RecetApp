@@ -2,23 +2,19 @@ package dad.recetapp.ui.xml;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.impl.CategoriasService;
 import dad.recetapp.services.impl.MedidasService;
-import dad.recetapp.services.items.TipoAnotacionesItem;
+import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.MedidaItem;
 
 public class TabMedidasController {
@@ -69,51 +65,20 @@ public class TabMedidasController {
 
 	@FXML
 	public void anadir() {
-		if (!nombreText.getText().equals("") || !abrevText.getText().equals(""))
-		{
-			MedidaItem medida = new MedidaItem();
-			medida.setNombre(nombreText.getText());
-			medida.setAbreviatura(abrevText.getText());
-			//medida.setId((long) 25);
-
-			try {
-				MS.crearMedida(medida);
-				medidasList.add(medida);
-			} catch (ServiceException e) {
-				e.printStackTrace();
-			}
-
-			nombreText.clear();
-			abrevText.clear();
-		}
-		else
-		{
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Atención");
-			alert.setHeaderText("Problemas al introducir medida");
-			alert.setContentText("La descripción no puede estar en blanco");
-
-			alert.showAndWait();
-		}
+		MedidaItem medida = new MedidaItem();
+		medida.setNombre(nombreText.getText());
+		medida.setAbreviatura(abrevText.getText());
+		medida.setId((long) 25);
+		
+		medidasList.add(medida);
+			
+		nombreText.clear();
+		abrevText.clear();
 	}
 
 	@FXML
 	public void eliminar() {
 		MedidaItem item = medidasTable.getSelectionModel().getSelectedItem();
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Eliminar");
-		alert.setHeaderText("Eliminando " + item.getNombre());
-		alert.setContentText("¿Está seguro que desea eliminarlo?");
-
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
-			try {
-				MS.eliminarMedida(item.getId());
-				medidasList.remove(item);
-			} catch (ServiceException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+		medidasList.remove(item);
+	}	
 }

@@ -1,5 +1,7 @@
 package dad.recetapp.ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -46,7 +48,7 @@ public class RecetAppMain extends Application {
 */
 		
 		timeline = new Timeline(new KeyFrame(
-				Duration.millis(1),
+				Duration.millis(4000),
 				ae -> mostrarVentanaSecundaria()));
 		timeline.play();
 	}

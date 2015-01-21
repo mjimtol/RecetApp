@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.TipoAnotacionesItem;
+import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.RecetaListItem;
 
@@ -46,7 +46,6 @@ public class TabRecetasController {
 	private ComboBox segundosCombobox;
 	@FXML
 	private ComboBox categoriaCombobox;
-	/*
 	@FXML
 	public void initialize() {	
 		try {
@@ -58,7 +57,6 @@ public class TabRecetasController {
 		}
 		recetasTableView.setItems(recetasList);
 	}
-	*/
 	@FXML
 	private void nuevaReceta(){
 	    try {
@@ -72,8 +70,6 @@ public class TabRecetasController {
         }
 	}
 }
-
-
 /*package dad.recetapp.ui.xml;
 
 import java.util.ArrayList;

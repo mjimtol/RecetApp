@@ -12,7 +12,7 @@ public class RecetaItem {
 	private String para;
 	private Integer tiempoTotal;
 	private Integer tiempoThermomix;
-	private TipoAnotacionesItem categoria;
+	private CategoriaItem categoria;
 	private List<AnotacionItem> anotaciones;
 	private List<SeccionItem> secciones;
 
@@ -72,11 +72,11 @@ public class RecetaItem {
 		this.tiempoThermomix = tiempoThermomix;
 	}
 
-	public TipoAnotacionesItem getCategoria() {
+	public CategoriaItem getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(TipoAnotacionesItem categoria) {
+	public void setCategoria(CategoriaItem categoria) {
 		this.categoria = categoria;
 	}
 
