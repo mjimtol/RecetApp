@@ -1,6 +1,7 @@
 package dad.recetapp.ui;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 
 import javafx.animation.KeyFrame;
@@ -12,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -46,7 +49,7 @@ public class RecetAppMain extends Application {
 */
 		
 		timeline = new Timeline(new KeyFrame(
-				Duration.millis(1),
+				Duration.millis(4000),
 				ae -> mostrarVentanaSecundaria()));
 		timeline.play();
 	}
@@ -57,6 +60,11 @@ public class RecetAppMain extends Application {
 
 	public void mostrarVentanaPrincipal() {
 		try {
+			URL url = getClass().getResource("../resources/Harmony.mp3");
+			Media media = new Media(url.toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			mediaPlayer.play();
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(RecetAppMain.class.getResource("xml/PantallaCarga.fxml"));
 			rootLayout = (AnchorPane) loader.load();
@@ -94,5 +102,4 @@ public class RecetAppMain extends Application {
 		timeline.stop();
 		mostrarVentanaSecundaria();
 	}
-
 }
