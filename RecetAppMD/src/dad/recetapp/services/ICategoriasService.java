@@ -2,14 +2,14 @@ package dad.recetapp.services;
 
 import java.util.List;
 
-import dad.recetapp.services.items.CategoriaItem;
+import dad.recetapp.services.items.TipoAnotacionesItem;
 
 public interface ICategoriasService {
 	
-	public void crearCategoria(CategoriaItem categoria) throws ServiceException;
-	public void modificarCategoria(CategoriaItem categoria) throws ServiceException;
+	public void crearCategoria(TipoAnotacionesItem categoria) throws ServiceException;
+	public void modificarCategoria(TipoAnotacionesItem categoria) throws ServiceException;
 	public void eliminarCategoria(Long id) throws ServiceException;
-	public List<CategoriaItem> listarCategorias() throws ServiceException;
-	public CategoriaItem obtenerCategoria(Long id) throws ServiceException;
+	public List<TipoAnotacionesItem> listarCategorias() throws ServiceException;
+	public TipoAnotacionesItem obtenerCategoria(Long id) throws ServiceException;
 
 }
