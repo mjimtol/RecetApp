@@ -11,7 +11,9 @@ Scene Builder: http://www.oracle.com/technetwork/java/javase/downloads/sb2downlo
 =========
 Tutorial: http://code.makery.ch/library/javafx-8-tutorial/es/part1/
 
-Orcale: https://docs.oracle.com/javase/8/javafx/get-started-tutorial/index.html
+Dialogs: http://code.makery.ch/blog/javafx-8-dialogs/
+
+Oracle: https://docs.oracle.com/javase/8/javafx/get-started-tutorial/index.html
 
 
 ==========
