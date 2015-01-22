@@ -40,6 +40,19 @@ public class TabCategoriasController {
 
 	@FXML
 	public void initialize() {	
+		
+		cargarDB();
+		
+		categoriasTable.setItems(categoriasList);
+
+		descripcionColumn.setCellValueFactory(new PropertyValueFactory<TipoAnotacionesItem, String>("Descripcion"));
+		descripcionColumn.setCellFactory(TextFieldTableCell.<TipoAnotacionesItem>forTableColumn());
+		descripcionColumn.setOnEditCommit(t -> ((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue()));
+	}
+
+	private void cargarDB() {
+		categorias = new ArrayList<TipoAnotacionesItem>();
+		categoriasList.clear();
 		try {
 			categorias = CS.listarCategorias();
 			for (TipoAnotacionesItem c: categorias)
@@ -47,12 +60,6 @@ public class TabCategoriasController {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-		
-		categoriasTable.setItems(categoriasList);
-
-		descripcionColumn.setCellValueFactory(new PropertyValueFactory<TipoAnotacionesItem, String>("Descripcion"));
-		descripcionColumn.setCellFactory(TextFieldTableCell.<TipoAnotacionesItem>forTableColumn());
-		descripcionColumn.setOnEditCommit(t -> ((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue()));
 	}
 
 	@FXML
@@ -64,7 +71,7 @@ public class TabCategoriasController {
 
 			try {
 				CS.crearCategoria(categoria);
-				categoriasList.add(categoria);
+				cargarDB();
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
@@ -86,6 +93,8 @@ public class TabCategoriasController {
 	public void eliminar() {
 		TipoAnotacionesItem item = categoriasTable.getSelectionModel().getSelectedItem();
 		
+		System.out.println(item.getId());
+		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Eliminar");
 		alert.setHeaderText("Eliminando " + item.getDescripcion());
@@ -99,8 +108,8 @@ public class TabCategoriasController {
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
-		} 
-	}	
+		}
+	}
 	
 	@FXML
 	public void modificar(){
