@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import dad.recetapp.services.ServiceException;
+import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.impl.TipoIngredienteService;
+import dad.recetapp.services.items.TipoAnotacionesItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,13 +24,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 
 public class TabIngredientesController {
 
-	TipoIngredienteService IS = new TipoIngredienteService();
+	//TipoIngredienteService IS = new TipoIngredienteService();
 	
 	private List<TipoIngredienteItem> tipoIngredientes = new ArrayList<TipoIngredienteItem>();
 
@@ -46,7 +50,7 @@ public class TabIngredientesController {
 	@FXML
 	public void initialize() {	
 		try {
-			tipoIngredientes = IS.listarTipoIngrediente();
+			tipoIngredientes = ServiceLocator.getITiposIngredientesService().listarTipoIngrediente();
 			for (TipoIngredienteItem i: tipoIngredientes)
 				tipoIngredientesList.add(i);
 		} catch (ServiceException e) {
@@ -57,9 +61,24 @@ public class TabIngredientesController {
 
 		nombreColumn.setCellValueFactory(new PropertyValueFactory<TipoIngredienteItem, String>("Nombre"));
 		nombreColumn.setCellFactory(TextFieldTableCell.<TipoIngredienteItem>forTableColumn());
-		nombreColumn.setOnEditCommit(t -> ((TipoIngredienteItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNombre(t.getNewValue()));
+		nombreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TipoIngredienteItem,String>>() {
+			public void handle(CellEditEvent<TipoIngredienteItem, String> t) {
+				((TipoIngredienteItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNombre(t.getNewValue());
+				modificar();
+			};
+		});
 	}
-	
+	private void cargarDB() {
+		tipoIngredientes = new ArrayList<TipoIngredienteItem>();
+		tipoIngredientesList.clear();
+		try {
+			tipoIngredientes = ServiceLocator.getITiposIngredientesService().listarTipoIngrediente();
+			for (TipoIngredienteItem c: tipoIngredientes)
+				tipoIngredientesList.add(c);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@FXML
 	public void anadir() {
@@ -69,8 +88,8 @@ public class TabIngredientesController {
 			tipoIngrediente.setNombre(ing_nombreText.getText());
 
 			try {
-				IS.crearTipoIngrediente(tipoIngrediente);
-				tipoIngredientesList.add(tipoIngrediente);
+				ServiceLocator.getITiposIngredientesService().crearTipoIngrediente(tipoIngrediente);
+				cargarDB();
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
@@ -100,11 +119,21 @@ public class TabIngredientesController {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 			try {
-				IS.eliminarTipoIngrediente(item.getId());
+				ServiceLocator.getITiposIngredientesService().eliminarTipoIngrediente(item.getId());
 				tipoIngredientesList.remove(item);
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
 		} 
-	}	
+	}
+	@FXML
+	public void modificar(){
+		//System.out.println("Modificando");
+		TipoIngredienteItem item = tipoIngredientesTable.getSelectionModel().getSelectedItem();
+		try {
+			ServiceLocator.getITiposIngredientesService().modificarTipoIngrediente(item);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 }
