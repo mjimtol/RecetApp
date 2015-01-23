@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -13,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import dad.recetapp.services.ServiceException;
@@ -47,7 +49,19 @@ public class TabCategoriasController {
 
 		descripcionColumn.setCellValueFactory(new PropertyValueFactory<TipoAnotacionesItem, String>("Descripcion"));
 		descripcionColumn.setCellFactory(TextFieldTableCell.<TipoAnotacionesItem>forTableColumn());
-		descripcionColumn.setOnEditCommit(t -> ((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue()));
+		
+//		descripcionColumn.setOnEditCommit(t -> ((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue()));
+		
+		descripcionColumn.setOnEditCommit(t -> ((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue()) );
+		
+		descripcionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TipoAnotacionesItem,String>>() {
+			public void handle(CellEditEvent<TipoAnotacionesItem, String> t) {
+				((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue());
+				modificar();
+			};
+		});
+
+		
 	}
 
 	private void cargarDB() {

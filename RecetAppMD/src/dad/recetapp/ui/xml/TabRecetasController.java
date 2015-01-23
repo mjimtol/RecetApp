@@ -14,10 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.TipoAnotacionesItem;
-import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.RecetaListItem;
 
 public class TabRecetasController {
@@ -63,7 +60,7 @@ public class TabRecetasController {
 	private void nuevaReceta(){
 	    try {
 	    	Stage stage = new Stage();
-	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
+	    	Parent root = FXMLLoader.load(getClass().getResource("Receta.fxml"));
 	        Scene scene = new Scene(root);
 	        stage.setScene(scene);
 	        stage.show();
