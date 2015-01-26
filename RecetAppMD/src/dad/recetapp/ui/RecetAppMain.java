@@ -71,6 +71,7 @@ public class RecetAppMain extends Application {
 
 			Scene scene = new Scene(rootLayout);
 			scene.setFill(Color.TRANSPARENT);
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("images/logo.png"))); //icono
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.setScene(scene);

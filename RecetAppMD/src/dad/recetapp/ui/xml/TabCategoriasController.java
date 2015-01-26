@@ -6,22 +6,24 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.impl.CategoriasService;
+import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.TipoAnotacionesItem;
 
 public class TabCategoriasController {
 
-	private CategoriasService CS = new CategoriasService();
+	TabRecetasController rc = new TabRecetasController();
 	
 	// lista que contiene los datos
 	private List<TipoAnotacionesItem> categorias = new ArrayList<TipoAnotacionesItem>();
@@ -40,19 +42,31 @@ public class TabCategoriasController {
 
 	@FXML
 	public void initialize() {	
-		try {
-			categorias = CS.listarCategorias();
-			for (TipoAnotacionesItem c: categorias)
-				categoriasList.add(c);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
+		
+		cargarDB();
 		
 		categoriasTable.setItems(categoriasList);
 
 		descripcionColumn.setCellValueFactory(new PropertyValueFactory<TipoAnotacionesItem, String>("Descripcion"));
 		descripcionColumn.setCellFactory(TextFieldTableCell.<TipoAnotacionesItem>forTableColumn());
-		descripcionColumn.setOnEditCommit(t -> ((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue()));
+		descripcionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TipoAnotacionesItem,String>>() {
+			public void handle(CellEditEvent<TipoAnotacionesItem, String> t) {
+				((TipoAnotacionesItem) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescripcion(t.getNewValue());
+				modificar();
+			};
+		});
+	}
+
+	private void cargarDB() {
+		categorias = new ArrayList<TipoAnotacionesItem>();
+		categoriasList.clear();
+		try {
+			categorias = ServiceLocator.getICategoriasService().listarCategorias();
+			for (TipoAnotacionesItem c: categorias)
+				categoriasList.add(c);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -63,8 +77,8 @@ public class TabCategoriasController {
 			categoria.setDescripcion(cat_descText.getText());
 
 			try {
-				CS.crearCategoria(categoria);
-				categoriasList.add(categoria);
+				ServiceLocator.getICategoriasService().crearCategoria(categoria);
+				cargarDB();
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
@@ -86,6 +100,8 @@ public class TabCategoriasController {
 	public void eliminar() {
 		TipoAnotacionesItem item = categoriasTable.getSelectionModel().getSelectedItem();
 		
+		//System.out.println(item.getId());
+		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Eliminar");
 		alert.setHeaderText("Eliminando " + item.getDescripcion());
@@ -94,20 +110,20 @@ public class TabCategoriasController {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 			try {
-				CS.eliminarCategoria(item.getId());
+				ServiceLocator.getICategoriasService().eliminarCategoria(item.getId());
 				categoriasList.remove(item);
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
-		} 
-	}	
+		}
+	}
 	
 	@FXML
 	public void modificar(){
-		System.out.println("Modificando");
+		//System.out.println("Modificando");
 		TipoAnotacionesItem item = categoriasTable.getSelectionModel().getSelectedItem();
 		try {
-			CS.modificarCategoria(item);
+			ServiceLocator.getICategoriasService().modificarCategoria(item);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
