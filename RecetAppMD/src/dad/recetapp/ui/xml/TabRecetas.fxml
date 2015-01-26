@@ -50,7 +50,7 @@
    <right>
       <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="346.0" prefWidth="84.0" vgap="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="addButton" fx:id="handleAddButton" mnemonicParsing="false" onAction="#nuevaReceta" prefHeight="25.0" prefWidth="75.0" text="Añadir" textAlignment="CENTER">
+            <Button id="addButton" mnemonicParsing="false" onAction="#nuevaReceta" prefHeight="25.0" prefWidth="75.0" text="Añadir" textAlignment="CENTER">
                <FlowPane.margin>
                   <Insets />
                </FlowPane.margin>
@@ -60,7 +60,7 @@
                   <Insets />
                </FlowPane.margin>
             </Button>
-            <Button id="editButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Editar">
+            <Button id="editButton" mnemonicParsing="false" onAction="#editarReceta" prefHeight="25.0" prefWidth="74.0" text="Editar">
                <FlowPane.margin>
                   <Insets />
                </FlowPane.margin>

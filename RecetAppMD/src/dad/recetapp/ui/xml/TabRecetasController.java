@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -84,6 +85,23 @@ public class TabRecetasController {
 	private void nuevaReceta(){
 	    try {
 	    	Stage stage = new Stage();
+	    	stage.setTitle("Nueva Receta");
+	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
+	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
+	        Scene scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.show();
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+	}
+	
+	@FXML
+	private void editarReceta(){
+	    try {
+	    	Stage stage = new Stage();
+	    	stage.setTitle("Editar Receta");
+	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
 	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
 	        Scene scene = new Scene(root);
 	        stage.setScene(scene);
