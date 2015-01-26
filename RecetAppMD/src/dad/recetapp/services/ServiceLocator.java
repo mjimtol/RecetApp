@@ -26,7 +26,7 @@ public class ServiceLocator {
 	public static ITiposIngredientesService getITiposIngredientesService(){
 		return tiposIngredientesService;
 	}
-	public static ICategoriasService getCategoriasService() {
+	public static ICategoriasService getICategoriasService() {
 		return categoriasService;
 	}
 	public static ITiposAnotacionesService getITiposAnotacionesService(){

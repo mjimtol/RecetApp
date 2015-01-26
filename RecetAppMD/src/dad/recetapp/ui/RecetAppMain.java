@@ -37,9 +37,19 @@ public class RecetAppMain extends Application {
 
 	private void initApp() {
 		mostrarVentanaPrincipal();
+/*
+		timer = new Timer (4000, new ActionListener () 
+		{ 
+			public void actionPerformed(ActionEvent e) 
+			{ 
+				mostrarVentanaSecundaria();
+			} 
+		}); 
+		timer.start();
+*/
 		
 		timeline = new Timeline(new KeyFrame(
-				Duration.seconds(4),
+				Duration.millis(4000),
 				ae -> mostrarVentanaSecundaria()));
 		timeline.play();
 	}
@@ -54,16 +64,18 @@ public class RecetAppMain extends Application {
 			Media media = new Media(url.toString());
 			MediaPlayer mediaPlayer = new MediaPlayer(media);
 			mediaPlayer.play();
-						
-			primaryStage.setTitle("RecetApp"); //titulo		
+			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(RecetAppMain.class.getResource("xml/PantallaCarga.fxml"));
+			rootLayout = (AnchorPane) loader.load();
+
+			Scene scene = new Scene(rootLayout);
+			scene.setFill(Color.TRANSPARENT);
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("images/logo.png"))); //icono
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
-			Parent root = FXMLLoader.load(getClass().getResource("xml/PantallaCarga.fxml"));
-			Scene scene = new Scene(root);
-			scene.setFill(Color.TRANSPARENT);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -88,8 +100,7 @@ public class RecetAppMain extends Application {
 	@FXML
 	private void handleClick(){
 		System.out.println("Click");
-		timeline.jumpTo(new Duration(4000));
-//		timeline.stop();
-//		mostrarVentanaSecundaria();
+		timeline.stop();
+		mostrarVentanaSecundaria();
 	}
 }

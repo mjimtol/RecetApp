@@ -16,9 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.TipoAnotacionesItem;
-import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.RecetaListItem;
+import dad.recetapp.services.items.TipoAnotacionesItem;
 
 public class TabRecetasController {
 	ServiceLocator Sl = new ServiceLocator();
@@ -46,9 +45,16 @@ public class TabRecetasController {
 	private ComboBox segundosCombobox;
 	@FXML
 	private ComboBox categoriaCombobox;
-	/*
+
+	// lista que contiene los datos
+	private List<TipoAnotacionesItem> categorias = new ArrayList<TipoAnotacionesItem>();
+
+	// lista "observable" que envuelve a la lista "variables" 
+	private ObservableList<TipoAnotacionesItem> categoriasList = FXCollections.observableList(categorias);
+
 	@FXML
 	public void initialize() {	
+		/*
 		try {
 			recetas = Sl.getIRecetasService().listarRecetas();
 			for (RecetaListItem c: recetas)
@@ -57,8 +63,23 @@ public class TabRecetasController {
 			e.printStackTrace();
 		}
 		recetasTableView.setItems(recetasList);
+		*/
+		cargarDB();
+		
+		int i = 1;
+		List <Integer> minutos = new ArrayList<Integer>();
+		for (; i <= 60; i++)
+			minutos.add(i);
+		segundosCombobox.getItems().addAll(minutos);
+		
+		for (; i <= 120; i++)
+			minutos.add(i);
+		minutosCombobox.getItems().addAll(minutos);
+		
+		for (TipoAnotacionesItem c: categorias)
+			categoriaCombobox.getItems().add(c.getDescripcion());	
 	}
-	*/
+	
 	@FXML
 	private void nuevaReceta(){
 	    try {
@@ -70,6 +91,28 @@ public class TabRecetasController {
         } catch (Exception e) {
         	e.printStackTrace();
         }
+	}
+	
+	private void cargarDB() {
+		categorias = new ArrayList<TipoAnotacionesItem>();
+		categoriasList.clear();
+		try {
+			categorias = ServiceLocator.getICategoriasService().listarCategorias();
+			for (TipoAnotacionesItem c: categorias)
+				categoriasList.add(c);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+
+	public List<TipoAnotacionesItem> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<TipoAnotacionesItem> categorias) {
+		this.categorias = categorias;
 	}
 }
 
