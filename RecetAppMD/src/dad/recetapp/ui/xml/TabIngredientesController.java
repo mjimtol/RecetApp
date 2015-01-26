@@ -101,7 +101,7 @@ public class TabIngredientesController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Atención");
 			alert.setHeaderText("Problemas al introducir tipo de ingrediente");
-			alert.setContentText("El nombre no puede estar en blanco");
+			alert.setContentText("La descripción no puede estar en blanco");
 
 			alert.showAndWait();
 		}
@@ -128,6 +128,7 @@ public class TabIngredientesController {
 	}
 	@FXML
 	public void modificar(){
+		//System.out.println("Modificando");
 		TipoIngredienteItem item = tipoIngredientesTable.getSelectionModel().getSelectedItem();
 		try {
 			ServiceLocator.getITiposIngredientesService().modificarTipoIngrediente(item);

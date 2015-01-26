@@ -19,11 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
+import dad.recetapp.services.impl.CategoriasService;
 import dad.recetapp.services.items.TipoAnotacionesItem;
 
 public class TabCategoriasController {
 
-	TabRecetasController rc = new TabRecetasController();
+	//private CategoriasService CS = new CategoriasService();
 	
 	// lista que contiene los datos
 	private List<TipoAnotacionesItem> categorias = new ArrayList<TipoAnotacionesItem>();
@@ -61,7 +62,7 @@ public class TabCategoriasController {
 		categorias = new ArrayList<TipoAnotacionesItem>();
 		categoriasList.clear();
 		try {
-			categorias = ServiceLocator.getICategoriasService().listarCategorias();
+			categorias = ServiceLocator.getCategoriasService().listarCategorias();
 			for (TipoAnotacionesItem c: categorias)
 				categoriasList.add(c);
 		} catch (ServiceException e) {
@@ -77,7 +78,7 @@ public class TabCategoriasController {
 			categoria.setDescripcion(cat_descText.getText());
 
 			try {
-				ServiceLocator.getICategoriasService().crearCategoria(categoria);
+				ServiceLocator.getCategoriasService().crearCategoria(categoria);
 				cargarDB();
 			} catch (ServiceException e) {
 				e.printStackTrace();
@@ -110,7 +111,7 @@ public class TabCategoriasController {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 			try {
-				ServiceLocator.getICategoriasService().eliminarCategoria(item.getId());
+				ServiceLocator.getCategoriasService().eliminarCategoria(item.getId());
 				categoriasList.remove(item);
 			} catch (ServiceException e) {
 				e.printStackTrace();
@@ -123,7 +124,7 @@ public class TabCategoriasController {
 		//System.out.println("Modificando");
 		TipoAnotacionesItem item = categoriasTable.getSelectionModel().getSelectedItem();
 		try {
-			ServiceLocator.getICategoriasService().modificarCategoria(item);
+			ServiceLocator.getCategoriasService().modificarCategoria(item);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

@@ -9,17 +9,21 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
+import dad.recetapp.services.impl.CategoriasService;
+import dad.recetapp.services.impl.MedidasService;
+import dad.recetapp.services.items.TipoAnotacionesItem;
 import dad.recetapp.services.items.MedidaItem;
+import dad.recetapp.services.items.TipoIngredienteItem;
 
 public class TabMedidasController {
 
@@ -89,11 +93,12 @@ public class TabMedidasController {
 	}
 	@FXML
 	public void anadir() {
-		if (!nombreText.getText().equals(""))
+		if (!nombreText.getText().equals("") || !abrevText.getText().equals(""))
 		{
 			MedidaItem medida = new MedidaItem();
 			medida.setNombre(nombreText.getText());
 			medida.setAbreviatura(abrevText.getText());
+			//medida.setId((long) 25);
 
 			try {
 				ServiceLocator.getIMedidasService().crearMedida(medida);
@@ -110,7 +115,7 @@ public class TabMedidasController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Atención");
 			alert.setHeaderText("Problemas al introducir medida");
-			alert.setContentText("El nombre no puede estar en blanco");
+			alert.setContentText("La descripción no puede estar en blanco");
 
 			alert.showAndWait();
 		}
