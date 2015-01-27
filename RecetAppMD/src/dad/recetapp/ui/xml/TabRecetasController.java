@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +14,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.RecetaListItem;
+import dad.recetapp.services.items.TipoAnotacionItem;
+import dad.recetapp.services.items.TipoAnotacionesItem;
 
 public class TabRecetasController {
 	ServiceLocator Sl = new ServiceLocator();
@@ -43,9 +51,16 @@ public class TabRecetasController {
 	private ComboBox segundosCombobox;
 	@FXML
 	private ComboBox categoriaCombobox;
-	/*
+
+	// lista que contiene los datos
+	private List<TipoAnotacionesItem> categorias = new ArrayList<TipoAnotacionesItem>();
+
+	// lista "observable" que envuelve a la lista "variables" 
+	private ObservableList<TipoAnotacionesItem> categoriasList = FXCollections.observableList(categorias);
+
 	@FXML
 	public void initialize() {	
+		/*
 		try {
 			recetas = Sl.getIRecetasService().listarRecetas();
 			for (RecetaListItem c: recetas)
@@ -54,19 +69,106 @@ public class TabRecetasController {
 			e.printStackTrace();
 		}
 		recetasTableView.setItems(recetasList);
+		*/
+		cargarDB();
+		
+		int i = 1;
+		List <Integer> minutos = new ArrayList<Integer>();
+		for (; i <= 60; i++)
+			minutos.add(i);
+		segundosCombobox.getItems().addAll(minutos);
+		
+		for (; i <= 120; i++)
+			minutos.add(i);
+		minutosCombobox.getItems().addAll(minutos);
+		
+		for (TipoAnotacionesItem c: categorias)
+			categoriaCombobox.getItems().add(c.getDescripcion());		
+		
+		
+		recetasTableView.setItems(recetasList);
+
+		nombreColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Nombre"));
+		nombreColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+		paraColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Para"));
+		paraColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+		tiempototalColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Tiempo Total"));
+		tiempototalColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+		fechacreacionColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Fecha Creacion"));
+		fechacreacionColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+		categoriaColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Categoria"));
+		categoriaColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 	}
-	*/
+	
 	@FXML
 	private void nuevaReceta(){
 	    try {
 	    	Stage stage = new Stage();
-	    	Parent root = FXMLLoader.load(getClass().getResource("Receta.fxml"));
+	    	stage.setTitle("Nueva Receta");
+	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
+	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
 	        Scene scene = new Scene(root);
 	        stage.setScene(scene);
 	        stage.show();
         } catch (Exception e) {
         	e.printStackTrace();
         }
+	}
+	
+	@FXML
+	private void editarReceta(){
+	    try {
+	    	Stage stage = new Stage();
+	    	stage.setTitle("Editar Receta");
+	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
+	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
+	        Scene scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.show();
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+	}
+	
+	@FXML
+	private void cargarDB() {
+		recetas = new ArrayList<RecetaListItem>();
+		recetasList.clear();		
+		
+		categorias = new ArrayList<TipoAnotacionesItem>();
+		categoriasList.clear();
+		try {
+			categorias = ServiceLocator.getICategoriasService().listarCategorias();
+			for (TipoAnotacionesItem c: categorias)
+				categoriasList.add(c);
+			recetas = ServiceLocator.getIRecetasService().listarRecetas();
+			for (RecetaListItem r: recetas)
+				recetasList.add(r);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	//Cada vez que se cambie una categoria hay que cambiar el comboBox (al hacer click)
+	@FXML
+	private void recargarCategorias(){
+		cargarDB();
+		categoriaCombobox.getItems().clear();
+		for (TipoAnotacionesItem c: categorias)
+			categoriaCombobox.getItems().add(c.getDescripcion());	
+	}
+	
+		
+	public List<TipoAnotacionesItem> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<TipoAnotacionesItem> categorias) {
+		this.categorias = categorias;
 	}
 }
 

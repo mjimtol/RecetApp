@@ -12,7 +12,7 @@
          <center>
             <AnchorPane>
                <children>
-                  <TableView id="anotacionesTable" fx:id="anotacionesTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView id="anotacionesTable" fx:id="anotacionesTable" editable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="descripcionColumn" prefWidth="75.0" text="Descripcion" />
                      </columns>
