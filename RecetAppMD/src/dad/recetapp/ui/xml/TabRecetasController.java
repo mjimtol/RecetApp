@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,11 +14,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.RecetaListItem;
+import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.services.items.TipoAnotacionesItem;
 
 public class TabRecetasController {
@@ -78,7 +83,25 @@ public class TabRecetasController {
 		minutosCombobox.getItems().addAll(minutos);
 		
 		for (TipoAnotacionesItem c: categorias)
-			categoriaCombobox.getItems().add(c.getDescripcion());	
+			categoriaCombobox.getItems().add(c.getDescripcion());		
+		
+		
+		recetasTableView.setItems(recetasList);
+
+		nombreColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("nombre"));
+		nombreColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+		paraColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("para"));
+		paraColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+//		tiempototalColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("tiempoTotal"));
+//		tiempototalColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+//		fechacreacionColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, Date>("fechaCreacion"));
+//		fechacreacionColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+		
+		categoriaColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("categoria"));
+		categoriaColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 	}
 	
 	@FXML
@@ -111,20 +134,35 @@ public class TabRecetasController {
         }
 	}
 	
+	@FXML
 	private void cargarDB() {
+		recetas = new ArrayList<RecetaListItem>();
+		recetasList.clear();		
+		
 		categorias = new ArrayList<TipoAnotacionesItem>();
 		categoriasList.clear();
 		try {
 			categorias = ServiceLocator.getICategoriasService().listarCategorias();
 			for (TipoAnotacionesItem c: categorias)
 				categoriasList.add(c);
+			recetas = ServiceLocator.getIRecetasService().listarRecetas();
+			for (RecetaListItem r: recetas)
+				recetasList.add(r);
 		} catch (ServiceException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
 	
+	//Cada vez que se cambie una categoria hay que cambiar el comboBox (al hacer click)
+	@FXML
+	private void recargarCategorias(){
+		cargarDB();
+		categoriaCombobox.getItems().clear();
+		for (TipoAnotacionesItem c: categorias)
+			categoriaCombobox.getItems().add(c.getDescripcion());	
+	}
 	
-
+		
 	public List<TipoAnotacionesItem> getCategorias() {
 		return categorias;
 	}

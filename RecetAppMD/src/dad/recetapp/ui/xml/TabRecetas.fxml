@@ -33,12 +33,12 @@
                   <Label text="Nombre: " />
                   <TextField id="nombreTxt" fx:id="nombreText" prefHeight="25.0" prefWidth="131.0" />
                   <Label text="Hasta: " />
-                  <ComboBox fx:id="minutosCombobox" prefHeight="25.0" prefWidth="15.0" />
+                  <ComboBox fx:id="minutosCombobox" prefHeight="25.0" prefWidth="70.0" />
                   <Label text="M " />
-                  <ComboBox fx:id="segundosCombobox" prefHeight="25.0" prefWidth="0.0" />
+                  <ComboBox fx:id="segundosCombobox" prefHeight="25.0" prefWidth="70.0" />
                   <Label text="S " />
                   <Label text="Categoría: " />
-                  <ComboBox fx:id="categoriaCombobox" prefHeight="25.0" prefWidth="106.0" />
+                  <ComboBox fx:id="categoriaCombobox" onMouseClicked="#recargarCategorias" prefHeight="25.0" prefWidth="106.0" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
