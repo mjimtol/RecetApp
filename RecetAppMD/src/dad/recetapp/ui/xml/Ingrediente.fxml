@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="150.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<BorderPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.ui.xml.TabModRecetasController">
    <center>
       <GridPane prefHeight="131.0" prefWidth="400.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -48,7 +47,7 @@
       <FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="37.0" prefWidth="395.0" BorderPane.alignment="CENTER">
          <children>
             <Button id="guardarButton" mnemonicParsing="false" text="Guardar cambios" />
-            <Button id="cancelarButton" mnemonicParsing="false" text="Cancelar" />
+            <Button id="cancelarButton" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
          </children>
          <BorderPane.margin>
             <Insets bottom="5.0" right="5.0" />

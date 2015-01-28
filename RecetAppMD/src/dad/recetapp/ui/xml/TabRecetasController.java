@@ -88,19 +88,19 @@ public class TabRecetasController {
 		
 		recetasTableView.setItems(recetasList);
 
-		nombreColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Nombre"));
+		nombreColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("nombre"));
 		nombreColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 		
-		paraColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Para"));
+		paraColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("para"));
 		paraColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 		
-		tiempototalColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Tiempo Total"));
-		tiempototalColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+//		tiempototalColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("tiempoTotal"));
+//		tiempototalColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 		
-		fechacreacionColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Fecha Creacion"));
-		fechacreacionColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
+//		fechacreacionColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, Date>("fechaCreacion"));
+//		fechacreacionColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 		
-		categoriaColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("Categoria"));
+		categoriaColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("categoria"));
 		categoriaColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 	}
 	
