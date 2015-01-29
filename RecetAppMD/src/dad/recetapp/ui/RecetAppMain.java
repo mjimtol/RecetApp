@@ -26,9 +26,10 @@ public class RecetAppMain extends Application {
 
 	private Stage primaryStage;
 	private AnchorPane rootLayout;
-	private Timeline timeline = new Timeline(new KeyFrame(
-			Duration.millis(1000),
-			ae -> mostrarVentanaSecundaria()));;
+	private Timeline timeline;
+//	= new Timeline(new KeyFrame(
+//			Duration.millis(4000),
+//			ae -> mostrarVentanaSecundaria()));;
 	private Timer timer;
 	
 	@Override
@@ -50,9 +51,9 @@ public class RecetAppMain extends Application {
 		timer.start();
 */
 		
-//		timeline = new Timeline(new KeyFrame(
-//				Duration.millis(4000),
-//				ae -> mostrarVentanaSecundaria()));
+		timeline = new Timeline(new KeyFrame(
+				Duration.millis(4000),
+				ae -> mostrarVentanaSecundaria()));
 		timeline.play();
 	}
 
@@ -103,8 +104,8 @@ public class RecetAppMain extends Application {
 	private void handleClick(){
 		System.out.println("Click");
 //		timeline.getOnFinished();
-		timeline.jumpTo(Duration.millis(4000));
-//		timeline.stop();
+//		timeline.jumpTo(Duration.millis(4000));
+		timeline.stop();
 //		mostrarVentanaSecundaria();
 	}
 }
