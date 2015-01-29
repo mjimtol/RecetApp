@@ -9,14 +9,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
+=======
+>>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+<<<<<<< HEAD
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+=======
+>>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -28,11 +34,15 @@ public class TabModRecetasController {
 
 	@FXML
 	private TextField seccionText;
+<<<<<<< HEAD
 	@FXML
 	private ImageView closeTabImage;
 	@FXML
 	private Button closeTabButton;
 	
+=======
+
+>>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 	@FXML
 	private TableView<MedidaItem> ingredientesTable;
 	@FXML
@@ -53,7 +63,11 @@ public class TabModRecetasController {
 	
 	@FXML
 	public void initialize() {	
+<<<<<<< HEAD
 		closeTabButton.setBackground(Background.EMPTY);
+=======
+		
+>>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 	}
 
 	@FXML
@@ -138,6 +152,7 @@ public class TabModRecetasController {
 	}
 
 	
+<<<<<<< HEAD
 	/*******/
 	
 	@FXML
@@ -150,6 +165,8 @@ public class TabModRecetasController {
 	
 	
 	
+=======
+>>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 	/**************************** INGREDIENTE ****************************/
 	@FXML
 	private TextField cantidadText;

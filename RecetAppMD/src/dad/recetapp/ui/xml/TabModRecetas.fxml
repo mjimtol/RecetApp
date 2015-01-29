@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< HEAD
 <?import javafx.scene.effect.*?>
+=======
+>>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -32,6 +35,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </FlowPane>
+<<<<<<< HEAD
             <Button fx:id="closeTabButton" contentDisplay="CENTER" mnemonicParsing="false" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" stylesheets="@login.css" textAlignment="CENTER" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -43,6 +47,12 @@
                      </image>
                   </ImageView>
                </graphic>
+=======
+            <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" styleClass="closeTab" stylesheets="@login.css" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+>>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
             </Button>
          </children>
       </GridPane>
