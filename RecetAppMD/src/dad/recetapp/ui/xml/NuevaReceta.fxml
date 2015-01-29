@@ -11,16 +11,16 @@
    <children>
       <BorderPane layoutX="-2.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
-            <FlowPane alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" hgap="10.0" prefHeight="32.0" prefWidth="495.0" BorderPane.alignment="CENTER">
+            <FlowPane alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" hgap="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleCrearButton" text="Crear" />
-                  <Button mnemonicParsing="false" text="Cancelar" />
+                  <Button mnemonicParsing="false" onAction="#crearButton" text="Crear" />
+                  <Button mnemonicParsing="false" onAction="#cancelarButton" text="Cancelar" />
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <BorderPane.margin>
-                  <Insets bottom="5.0" right="5.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </BorderPane.margin>
             </FlowPane>
          </bottom>

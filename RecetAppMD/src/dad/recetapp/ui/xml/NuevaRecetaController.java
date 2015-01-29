@@ -8,8 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
+import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.TipoAnotacionesItem;
 
@@ -35,9 +37,8 @@ public class NuevaRecetaController {
 	@FXML
 	private ComboBox categoriaCombo;
 	
-	
 	@FXML
-	public void initialize() {	
+	public void initialize() {
 		int i = 1;
 		List <Integer> minutos = new ArrayList<Integer>();
 		for (; i <= 60; i++)
@@ -50,13 +51,29 @@ public class NuevaRecetaController {
 		minutosTotalCombo.getItems().addAll(minutos);
 		minutosThermomixCombo.getItems().addAll(minutos);
 		
+		
+		cargarDB();
 //		for (TipoAnotacionesItem c: categorias)
 //			categoriaCombobox.getItems().add(c.getDescripcion());		
 	}
 	
 	
+	private void cargarDB() {
+		try {
+			List<TipoAnotacionesItem> categorias = ServiceLocator.getICategoriasService().listarCategorias();
+			for (TipoAnotacionesItem c: categorias)
+				categoriaCombo.getItems().add(c.getDescripcion());
+			paraCombo.getItems().add("Personas");
+			paraCombo.getItems().add("Unidades");
+			paraCombo.getItems().add("Raciones");
+			paraCombo.getItems().add("Cabritos");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@FXML
-	private void handleCrearButton() {
+	private void crearButton() {
 		System.out.println("CREANDO");
 		
 		RecetaItem receta = new RecetaItem();
@@ -88,6 +105,13 @@ public class NuevaRecetaController {
 			e.printStackTrace();
 		}
 	}	
+	
+	@FXML
+	private void cancelarButton()
+	{
+		
+	}
+	
 	
 	@FXML
 	private void addTab(){
