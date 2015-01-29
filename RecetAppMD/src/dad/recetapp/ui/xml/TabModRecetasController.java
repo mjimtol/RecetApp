@@ -9,11 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -25,7 +28,11 @@ public class TabModRecetasController {
 
 	@FXML
 	private TextField seccionText;
-
+	@FXML
+	private ImageView closeTabImage;
+	@FXML
+	private Button closeTabButton;
+	
 	@FXML
 	private TableView<MedidaItem> ingredientesTable;
 	@FXML
@@ -46,7 +53,7 @@ public class TabModRecetasController {
 	
 	@FXML
 	public void initialize() {	
-		
+		closeTabButton.setBackground(Background.EMPTY);
 	}
 
 	@FXML
@@ -130,6 +137,18 @@ public class TabModRecetasController {
 
 	}
 
+	
+	/*******/
+	
+	@FXML
+	private void onMouseOver()
+	{	closeTabImage.setImage(new Image("dad/recetapp/ui/images/closeTabOverIcon.png"));	}
+
+	@FXML
+	private void onMouseExit()
+	{	closeTabImage.setImage(new Image("dad/recetapp/ui/images/closeTabIcon.png"));	}
+	
+	
 	
 	/**************************** INGREDIENTE ****************************/
 	@FXML

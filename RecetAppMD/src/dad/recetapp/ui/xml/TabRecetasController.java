@@ -60,16 +60,6 @@ public class TabRecetasController {
 
 	@FXML
 	public void initialize() {	
-		/*
-		try {
-			recetas = Sl.getIRecetasService().listarRecetas();
-			for (RecetaListItem c: recetas)
-				recetas.add(c);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-		recetasTableView.setItems(recetasList);
-		*/
 		cargarDB();
 		
 		int i = 1;
@@ -83,8 +73,7 @@ public class TabRecetasController {
 		minutosCombobox.getItems().addAll(minutos);
 		
 		for (TipoAnotacionesItem c: categorias)
-			categoriaCombobox.getItems().add(c.getDescripcion());		
-		
+			categoriaCombobox.getItems().add(c.getDescripcion());				
 		
 		recetasTableView.setItems(recetasList);
 

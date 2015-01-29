@@ -27,25 +27,25 @@
          <top>
             <HBox prefHeight="92.0" prefWidth="580.0">
                <children>
-                  <VBox prefHeight="92.0" prefWidth="333.0" BorderPane.alignment="CENTER">
+                  <VBox prefHeight="92.0" prefWidth="291.0" BorderPane.alignment="CENTER">
                      <children>
                         <FlowPane hgap="5.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER_RIGHT" prefWidth="55.0" text="Nombre:" />
-                              <TextField prefHeight="25.0" prefWidth="241.0" />
+                              <TextField fx:id="nombreText" prefHeight="25.0" prefWidth="220.0" />
                            </children>
                         </FlowPane>
                         <FlowPane hgap="5.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="55.0" text="Para:" />
-                              <TextField prefHeight="25.0" prefWidth="56.0" />
-                              <ComboBox prefHeight="25.0" prefWidth="128.0" />
+                              <TextField fx:id="paraText" prefHeight="25.0" prefWidth="56.0" />
+                              <ComboBox fx:id="paraCombo" prefHeight="25.0" prefWidth="128.0" />
                            </children>
                         </FlowPane>
                         <FlowPane hgap="5.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="55.0" text="Categoría:" />
-                              <ComboBox prefWidth="150.0" />
+                              <ComboBox fx:id="categoriaCombo" prefWidth="150.0" />
                            </children>
                         </FlowPane>
                      </children>
@@ -55,9 +55,9 @@
                         <GridPane>
                           <columnConstraints>
                             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="139.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.0" minWidth="10.0" prefWidth="52.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.0" minWidth="10.0" prefWidth="65.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="10.0" prefWidth="16.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="53.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="65.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="49.0" minWidth="10.0" prefWidth="10.0" />
                           </columnConstraints>
                           <rowConstraints>
@@ -66,18 +66,18 @@
                           </rowConstraints>
                            <children>
                               <Label text="Tiempo total: " />
-                              <ComboBox prefHeight="25.0" prefWidth="22.0" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="minutosTotalCombo" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="1" />
                               <Label text="M" GridPane.columnIndex="2" />
-                              <ComboBox prefHeight="25.0" prefWidth="34.0" GridPane.columnIndex="3" />
+                              <ComboBox fx:id="segundosTotalCombo" prefHeight="25.0" prefWidth="60.0" GridPane.columnIndex="3" />
                               <Label text="S" GridPane.columnIndex="4" />
                               <Label text="Tiempo con Thermomix:" GridPane.rowIndex="1">
                                  <padding>
                                     <Insets right="5.0" />
                                  </padding>
                               </Label>
-                              <ComboBox prefHeight="25.0" prefWidth="22.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="minutosThermomixCombo" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="M" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <ComboBox prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="segundosThermomixCombo" prefHeight="25.0" prefWidth="60.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <Label text="S" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>

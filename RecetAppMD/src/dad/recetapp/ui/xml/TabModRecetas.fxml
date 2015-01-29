@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -31,10 +32,17 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </FlowPane>
-            <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" styleClass="closeTab" stylesheets="@login.css" GridPane.columnIndex="1">
+            <Button fx:id="closeTabButton" contentDisplay="CENTER" mnemonicParsing="false" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" stylesheets="@login.css" textAlignment="CENTER" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
+               <graphic>
+                  <ImageView fx:id="closeTabImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/closeTabIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
       </GridPane>
