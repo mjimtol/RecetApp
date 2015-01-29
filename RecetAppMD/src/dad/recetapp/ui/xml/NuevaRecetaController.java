@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javafx.fxml.FXML;
-<<<<<<< HEAD
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -15,15 +14,11 @@ import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.TipoAnotacionesItem;
-=======
-import javafx.scene.control.TabPane;
->>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 
 public class NuevaRecetaController {
 		
 	@FXML
 	private TabPane tabs;
-<<<<<<< HEAD
 	
 	@FXML
 	private TextField nombreText;
@@ -62,8 +57,6 @@ public class NuevaRecetaController {
 //			categoriaCombobox.getItems().add(c.getDescripcion());		
 	}
 	
-=======
->>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 	
 	private void cargarDB() {
 		try {
@@ -82,7 +75,6 @@ public class NuevaRecetaController {
 	@FXML
 	private void crearButton() {
 		System.out.println("CREANDO");
-<<<<<<< HEAD
 		
 		RecetaItem receta = new RecetaItem();
 		receta.setNombre(nombreText.getText());
@@ -117,24 +109,15 @@ public class NuevaRecetaController {
 	@FXML
 	private void cancelarButton()
 	{
-=======
-	}	
-	
-	@FXML
-	private void addTab(){
->>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 		
 	}
 	
 	
-<<<<<<< HEAD
 	@FXML
 	private void addTab(){
 		
 	}
 	
 	
-=======
->>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 	
 }

@@ -60,7 +60,6 @@ public class TabRecetasController {
 
 	@FXML
 	public void initialize() {	
-<<<<<<< HEAD
 		cargarDB();
 		
 		int i = 1;
@@ -77,35 +76,6 @@ public class TabRecetasController {
 			categoriaCombobox.getItems().add(c.getDescripcion());				
 		
 		recetasTableView.setItems(recetasList);
-=======
-		/*
-		try {
-			recetas = Sl.getIRecetasService().listarRecetas();
-			for (RecetaListItem c: recetas)
-				recetas.add(c);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-		recetasTableView.setItems(recetasList);
-		*/
-		cargarDB();
-		
-		int i = 1;
-		List <Integer> minutos = new ArrayList<Integer>();
-		for (; i <= 60; i++)
-			minutos.add(i);
-		segundosCombobox.getItems().addAll(minutos);
-		
-		for (; i <= 120; i++)
-			minutos.add(i);
-		minutosCombobox.getItems().addAll(minutos);
-		
-		for (TipoAnotacionesItem c: categorias)
-			categoriaCombobox.getItems().add(c.getDescripcion());		
-		
-		
-		recetasTableView.setItems(recetasList);
->>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 
 		nombreColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("nombre"));
 		nombreColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
@@ -129,8 +99,6 @@ public class TabRecetasController {
 	    	Stage stage = new Stage();
 	    	stage.setTitle("Nueva Receta");
 	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
-<<<<<<< HEAD
-=======
 	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
 	        Scene scene = new Scene(root);
 	        stage.setScene(scene);
@@ -146,7 +114,6 @@ public class TabRecetasController {
 	    	Stage stage = new Stage();
 	    	stage.setTitle("Editar Receta");
 	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
->>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
 	        Scene scene = new Scene(root);
 	        stage.setScene(scene);
@@ -157,24 +124,6 @@ public class TabRecetasController {
 	}
 	
 	@FXML
-<<<<<<< HEAD
-	private void editarReceta(){
-	    try {
-	    	Stage stage = new Stage();
-	    	stage.setTitle("Editar Receta");
-	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
-	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
-	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.show();
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-	}
-	
-	@FXML
-=======
->>>>>>> ccc87f1d13c132dedc7f87c575b738f8eaf80da1
 	private void cargarDB() {
 		recetas = new ArrayList<RecetaListItem>();
 		recetasList.clear();		
