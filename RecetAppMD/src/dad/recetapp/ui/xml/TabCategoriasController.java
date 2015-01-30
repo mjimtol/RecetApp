@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -42,7 +43,7 @@ public class TabCategoriasController {
 
 	@FXML
 	public void initialize() {	
-		
+		categoriasTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cargarDB();
 		
 		categoriasTable.setItems(categoriasList);

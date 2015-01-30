@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,7 +48,8 @@ public class TabAnotacionesController {
 	
 
 	@FXML
-	public void initialize() {	
+	public void initialize() {
+		anotacionesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		try {
 			anotaciones = ServiceLocator.getITiposAnotacionesService().listarTipoAnotacion();
 			for (TipoAnotacionItem a: anotaciones)

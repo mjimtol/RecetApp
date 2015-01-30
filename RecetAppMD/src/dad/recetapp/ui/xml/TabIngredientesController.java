@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -49,6 +50,7 @@ public class TabIngredientesController {
 	
 	@FXML
 	public void initialize() {	
+		tipoIngredientesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		try {
 			tipoIngredientes = ServiceLocator.getITiposIngredientesService().listarTipoIngrediente();
 			for (TipoIngredienteItem i: tipoIngredientes)
