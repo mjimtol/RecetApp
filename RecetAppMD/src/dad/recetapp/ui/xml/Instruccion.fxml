@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="root" prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.ui.xml.TabModRecetasController">
    <bottom>
       <FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="41.0" prefWidth="395.0" BorderPane.alignment="CENTER">
          <children>
             <Button id="addButton" mnemonicParsing="false" text="Añadir" />
-            <Button id="cancelButton" mnemonicParsing="false" text="Cancelar" />
+            <Button id="cancelButton" mnemonicParsing="false" onAction="#cerrar" text="Cancelar" />
          </children>
          <BorderPane.margin>
             <Insets bottom="5.0" right="5.0" />

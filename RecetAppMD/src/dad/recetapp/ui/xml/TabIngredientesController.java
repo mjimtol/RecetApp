@@ -4,31 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.impl.TipoIngredienteService;
-import dad.recetapp.services.items.TipoAnotacionesItem;
-import dad.recetapp.services.items.TipoIngredienteItem;
-import dad.recetapp.services.items.TipoIngredienteItem;
-import dad.recetapp.services.items.TipoIngredienteItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Stage;
+import dad.recetapp.services.ServiceException;
+import dad.recetapp.services.ServiceLocator;
+import dad.recetapp.services.items.TipoIngredienteItem;
 
 public class TabIngredientesController {
 

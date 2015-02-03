@@ -26,6 +26,9 @@ import dad.recetapp.services.items.TipoIngredienteItem;
 public class TabModRecetasController {
 
 	@FXML
+	private Parent root;
+	
+	@FXML
 	private TextField seccionText;
 	@FXML
 	private ImageView closeTabImage;
@@ -53,49 +56,13 @@ public class TabModRecetasController {
 	NuevaRecetaController recetaController;
 	
 	@FXML
-	public void initialize() {	
-		closeTabButton.setBackground(Background.EMPTY);
-	}
-
-	@FXML
-	private void AddIngrediente(){
-		cargarDBIngredientes();
+	public void initialize() {
 		try{
-			stage = new Stage();
-			stage.setTitle("Nuevo ingrediente para 'X'");
-			stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
-			Parent root = FXMLLoader.load(getClass().getResource("Ingrediente.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		for (TipoIngredienteItem c: tipoIngredientesList)
-			tipoCombo.getItems().add(c.getNombre());
+			closeTabButton.setBackground(Background.EMPTY);
+		}catch(Exception e){}
 	}
 
-	@FXML
-	private void EditIngrediente(){
-		try{
-			Stage stage = new Stage();
-			stage.setTitle("Editar ingrediente 'X'");
-			stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
-			Parent root = FXMLLoader.load(getClass().getResource("Ingrediente.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@FXML
-	private void suprIngrediente(){
-
-	}
-
+	/**************************** INSTRUCCION ****************************/
 
 	@FXML
 	private void AddInstruccion(){
@@ -137,7 +104,6 @@ public class TabModRecetasController {
 	private void DeleteTab(){
 
 	}
-
 	
 	/*******/
 	
@@ -150,27 +116,55 @@ public class TabModRecetasController {
 	{	closeTabImage.setImage(new Image("dad/recetapp/ui/images/closeTabOverIcon.png"));	}
 	
 	
-	
 	/**************************** INGREDIENTE ****************************/
+	
 	@FXML
 	private TextField cantidadText;
 	@FXML
-	private ComboBox medidaCombo;
+	private ComboBox<MedidaItem> medidaCombo;
 	@FXML
-	private ComboBox tipoCombo = new ComboBox<TipoIngredienteItem>();
+	private ComboBox<String> tipoCombo = new ComboBox<String>();
 	
 	private List<TipoIngredienteItem> tipoIngredientes = new ArrayList<TipoIngredienteItem>();
 	private ObservableList<TipoIngredienteItem> tipoIngredientesList = FXCollections.observableList(tipoIngredientes);
 
 	@FXML
-	private void crearIngr(){
-		//ingredientesTable
+	private void AddIngrediente(){
+		cargarDBIngredientes();
+		try{
+			stage = new Stage();
+			stage.setTitle("Nuevo ingrediente para 'X'");
+			stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
+			Parent root = FXMLLoader.load(getClass().getResource("Ingrediente.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		for (TipoIngredienteItem c: tipoIngredientesList)
+			tipoCombo.getItems().add(c.getNombre());
 	}
-	
+
 	@FXML
-	private void cancelar(){
-		System.out.println("Cancelar");
-		stage.close();
+	private void EditIngrediente(){
+		try{
+			Stage stage = new Stage();
+			stage.setTitle("Editar ingrediente 'X'");
+			stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
+			Parent root = FXMLLoader.load(getClass().getResource("Ingrediente.fxml"));
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void suprIngrediente(){
+
 	}
 	
 	private void cargarDBIngredientes() {
@@ -187,17 +181,17 @@ public class TabModRecetasController {
 		}
 		
 	}
-
-	
-	
-	
-	/**************************** INSTRUCCION ****************************/
-	
 	
 	/****/
 	
 	public void setRecetaController(NuevaRecetaController recetaController) {
 		this.recetaController = recetaController;
+	}
+	
+	@FXML
+	private void cerrar(){
+		Stage stage = (Stage) root.getScene().getWindow(); 
+		stage.close();
 	}
 }
 

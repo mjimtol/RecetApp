@@ -121,7 +121,7 @@ public class NuevaRecetaController {
 			}			
 
 			receta.setCategoria(categoria);
-			recetasController.cargarDB();
+//			recetasController.cargarDB();
 			
 			try {
 				if (addButton.getText().equals("Crear"))
@@ -170,8 +170,4 @@ public class NuevaRecetaController {
 		this.recetasController = recetasController;			
 		rellenarDatos();		
 	}
-
-	
-
-	
 }

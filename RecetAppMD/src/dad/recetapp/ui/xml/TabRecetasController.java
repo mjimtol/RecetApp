@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -122,22 +124,36 @@ public class TabRecetasController{
 	
 	@FXML
 	private void editarReceta(){
-	    try {
-	    	setRecetaSeleccionada(recetasTableView.getSelectionModel().getSelectedItem());
-	    	
-	    	FXMLLoader loader = new FXMLLoader(TabRecetasController.class.getResource("NuevaReceta.fxml"));	 
-	    		    	
-	    	AnchorPane rootPane = (AnchorPane) loader.load();	    	
-	    	Scene scene = new Scene(rootPane);
-	    	
-	    	Stage stagePrincipal = new Stage();
-	    	stagePrincipal.setTitle("Editar Receta");
-	    	stagePrincipal.setScene(scene);
-	    	
-	    	NuevaRecetaController controller = loader.getController();
-	    	controller.setRecetasController(this);
-	    	    		    	
-	    	stagePrincipal.show();
+		try {
+			RecetaListItem receta = recetasTableView.getSelectionModel().getSelectedItem();
+
+			if (receta != null)
+			{
+				setRecetaSeleccionada(receta);
+
+				FXMLLoader loader = new FXMLLoader(TabRecetasController.class.getResource("NuevaReceta.fxml"));	 
+
+				AnchorPane rootPane = (AnchorPane) loader.load();	    	
+				Scene scene = new Scene(rootPane);
+
+				Stage stagePrincipal = new Stage();
+				stagePrincipal.setTitle("Editar Receta");
+				stagePrincipal.setScene(scene);
+
+				NuevaRecetaController controller = loader.getController();
+				controller.setRecetasController(this);
+
+				stagePrincipal.show();
+			}
+			else
+			{
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Atención");
+				alert.setHeaderText("Problemas al intentar editar");
+				alert.setContentText("Debe escoger una receta primero");
+
+				alert.showAndWait();
+			}
         } catch (Exception e) {
         	e.printStackTrace();
         }
