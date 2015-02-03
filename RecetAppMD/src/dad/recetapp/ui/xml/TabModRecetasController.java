@@ -192,7 +192,6 @@ public class TabModRecetasController {
 	private void cerrar(){
 		Stage stage = (Stage) root.getScene().getWindow(); 
 		stage.close();
-	}
+	}	
+	
 }
-
-

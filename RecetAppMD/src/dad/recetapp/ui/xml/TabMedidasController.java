@@ -140,6 +140,7 @@ public class TabMedidasController {
 			}
 		}
 	}
+	
 	@FXML
 	public void modificar(){
 		//System.out.println("Modificando");

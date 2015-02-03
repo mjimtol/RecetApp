@@ -121,7 +121,6 @@ public class NuevaRecetaController {
 			}			
 
 			receta.setCategoria(categoria);
-//			recetasController.cargarDB();
 			
 			try {
 				if (addButton.getText().equals("Crear"))
@@ -134,6 +133,7 @@ public class NuevaRecetaController {
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
+			recetasController.cargarDB();
 			cerrarVentana();
 	}	
 		
@@ -154,20 +154,24 @@ public class NuevaRecetaController {
 	}
 
 	private void rellenarDatos() {
-		addButton.setText("Guardar cambios");
 		RecetaListItem receta = recetasController.getRecetaSeleccionada();
-		nombreText.setText(receta.getNombre());
-		paraText.setText(receta.getCantidad().toString());
-		paraCombo.setValue(receta.getPara());
-		categoriaCombo.setValue(receta.getCategoria());
-		minutosTotalCombo.setValue(receta.getTiempoTotal() / 60);
-		segundosTotalCombo.setValue(receta.getTiempoTotal() % 60);
-		minutosThermomixCombo.setValue(receta.getTiempoThermomix() / 60);
-		segundosThermomixCombo.setValue(receta.getTiempoThermomix() % 60);
+
+		if (receta != null)
+		{
+			nombreText.setText(receta.getNombre());
+			paraText.setText(receta.getCantidad().toString());
+			paraCombo.setValue(receta.getPara());
+			categoriaCombo.setValue(receta.getCategoria());
+			minutosTotalCombo.setValue(receta.getTiempoTotal() / 60);
+			segundosTotalCombo.setValue(receta.getTiempoTotal() % 60);
+			minutosThermomixCombo.setValue(receta.getTiempoThermomix() / 60);
+			segundosThermomixCombo.setValue(receta.getTiempoThermomix() % 60);
+			addButton.setText("Guardar cambios");
+		}
 	}
 
 	public void setRecetasController(TabRecetasController recetasController) {
-		this.recetasController = recetasController;			
-		rellenarDatos();		
+		this.recetasController = recetasController;				
+		rellenarDatos();
 	}
 }

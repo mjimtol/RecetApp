@@ -2,22 +2,23 @@ package dad.recetapp.ui.xml;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
@@ -61,7 +62,8 @@ public class TabRecetasController{
 		cargarDB();
 				
 		recetasTableView.setItems(recetasList);
-
+		recetasTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
 		nombreColumn.setCellValueFactory(new PropertyValueFactory<RecetaListItem, String>("nombre"));
 		nombreColumn.setCellFactory(TextFieldTableCell.<RecetaListItem>forTableColumn());
 		
@@ -99,13 +101,18 @@ public class TabRecetasController{
 	@FXML
 	private void nuevaReceta(){
 	    try {
-	    	Stage stage = new Stage();
-	    	stage.setTitle("Nueva Receta");
-	    	stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
-	    	Parent root = FXMLLoader.load(getClass().getResource("NuevaReceta.fxml"));
-	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.show();
+	    	FXMLLoader loader = new FXMLLoader(TabRecetasController.class.getResource("NuevaReceta.fxml"));	 
+
+			AnchorPane rootPane = (AnchorPane) loader.load();	    	
+			Scene scene = new Scene(rootPane);
+			Stage stagePrincipal = new Stage();
+			stagePrincipal.setTitle("Nueva Receta");
+			stagePrincipal.setScene(scene);
+
+			NuevaRecetaController controller = loader.getController();
+			controller.setRecetasController(this);
+
+			stagePrincipal.show();
         } catch (Exception e) {
         	e.printStackTrace();
         }
@@ -113,13 +120,25 @@ public class TabRecetasController{
 	
 	@FXML
 	private void eliminarReceta(){
-		RecetaListItem receta = recetasTableView.getSelectionModel().getSelectedItem();
-		try {
-			ServiceLocator.getIRecetasService().eliminarReceta(receta.getId());
-			cargarDB();
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
+		List<RecetaListItem> seleccionados = recetasTableView.getSelectionModel().getSelectedItems();
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Eliminar");
+		alert.setHeaderText("Eliminando " + seleccionados.size() + " receta(s)");
+		alert.setContentText("¿Está seguro que desea eliminarla(s)?");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			try {
+				for(RecetaListItem receta : seleccionados){
+					System.out.println("eliminando " + receta.getNombre());
+					ServiceLocator.getIRecetasService().eliminarReceta(receta.getId());					
+				}			
+				recetasList.removeAll(seleccionados);
+			} catch (ServiceException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 	
 	@FXML
@@ -162,7 +181,7 @@ public class TabRecetasController{
 	@FXML
 	public void cargarDB() {
 		recetas = new ArrayList<RecetaListItem>();
-		recetasList.clear();		
+		recetasList.clear();
 		
 		categorias = new ArrayList<TipoAnotacionesItem>();
 		categoriasList.clear();
