@@ -10,7 +10,7 @@
    <bottom>
       <FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="41.0" prefWidth="395.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="addButton" mnemonicParsing="false" text="Añadir" />
+            <Button id="addButton" mnemonicParsing="false" onAction="#guardarInstruccion" text="Añadir" />
             <Button id="cancelButton" mnemonicParsing="false" onAction="#cerrar" text="Cancelar" />
          </children>
          <BorderPane.margin>

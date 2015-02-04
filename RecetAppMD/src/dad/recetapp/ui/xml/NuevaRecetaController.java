@@ -1,17 +1,19 @@
 package dad.recetapp.ui.xml;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -75,7 +77,6 @@ public class NuevaRecetaController {
 			List<TipoAnotacionesItem> categorias = ServiceLocator.getICategoriasService().listarCategorias();
 			for (TipoAnotacionesItem c: categorias)
 				categoriaCombo.getItems().add(c.getDescripcion());
-//			categoriaCombo.setVisible();
 			paraCombo.getItems().add("Personas");
 			paraCombo.getItems().add("Unidades");
 			paraCombo.getItems().add("Raciones");
@@ -145,12 +146,19 @@ public class NuevaRecetaController {
 	}
 	
 	@FXML
-	private void addTab(){
-		System.out.println("Add");
+	private void addTab() throws IOException{
 		Tab tab = new Tab();
-		tab.setText("new tab");
-		tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
+		tab.setText("Pene");
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("TabModRecetas.fxml"));	 
+		
+		BorderPane rootPane = (BorderPane) loader.load();	    
+		
+		TabModRecetasController controller = loader.getController();
+		controller.setRecetaController(this);
+		controller.setParentTab(tab);
+		
 		tabs.getTabs().add(tab);
+		tab.setContent((Node)rootPane);
 	}
 
 	private void rellenarDatos() {

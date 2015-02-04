@@ -25,6 +25,6 @@ public class FrameController {
 		this.cantidadRecetasLabel.setText("Recetas: " + cantidadRecetas);
 	}
 	
-	
+		
 	
 }
