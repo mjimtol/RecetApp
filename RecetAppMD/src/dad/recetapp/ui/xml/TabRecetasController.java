@@ -193,8 +193,6 @@ public class TabRecetasController{
 			if(idCategoria==0)
 				idCategoria=null;
 			recetas = ServiceLocator.getIRecetasService().buscarRecetas(nombreReceta, tiempoReceta,idCategoria );
-			System.out.println(nombreReceta+" "+tiempoReceta+" "+idCategoria);
-			System.out.println(recetas.size());
 			for (RecetaListItem r: recetas)
 				recetasList.add(r);
 		}catch(Exception e){
