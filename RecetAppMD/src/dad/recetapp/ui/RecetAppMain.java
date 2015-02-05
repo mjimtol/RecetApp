@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,19 +41,8 @@ public class RecetAppMain extends Application {
 
 	private void initApp() {
 		mostrarVentanaPrincipal();
-/*
-		timer = new Timer (4000, new ActionListener () 
-		{ 
-			public void actionPerformed(ActionEvent e) 
-			{ 
-				mostrarVentanaSecundaria();
-			} 
-		}); 
-		timer.start();
-*/
 		
-		timeline = new Timeline(new KeyFrame(
-				Duration.millis(4000),
+		timeline = new Timeline(new KeyFrame(Duration.millis(1000),
 				ae -> mostrarVentanaSecundaria()));
 		timeline.play();
 	}

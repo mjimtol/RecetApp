@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -42,7 +43,7 @@ public class TabCategoriasController {
 
 	@FXML
 	public void initialize() {	
-		
+		categoriasTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cargarDB();
 		
 		categoriasTable.setItems(categoriasList);
@@ -98,20 +99,26 @@ public class TabCategoriasController {
 
 	@FXML
 	public void eliminar() {
-		TipoAnotacionesItem item = categoriasTable.getSelectionModel().getSelectedItem();
+		//TipoAnotacionesItem item = categoriasTable.getSelectionModel().getSelectedItem();
+		ObservableList<TipoAnotacionesItem> seleccionados = categoriasTable.getSelectionModel().getSelectedItems();
 		
 		//System.out.println(item.getId());
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Eliminar");
-		alert.setHeaderText("Eliminando " + item.getDescripcion());
+		alert.setHeaderText("Eliminando " + seleccionados.size() + " registro(s).");
 		alert.setContentText("¿Está seguro que desea eliminarlo?");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 			try {
-				ServiceLocator.getICategoriasService().eliminarCategoria(item.getId());
-				categoriasList.remove(item);
+				for(TipoAnotacionesItem seleccionado : seleccionados){
+					System.out.println("Eliminando: "+seleccionado.getDescripcion());
+					ServiceLocator.getICategoriasService().eliminarCategoria(seleccionado.getId());
+				}
+				categoriasList.removeAll(seleccionados);
+				/*ServiceLocator.getICategoriasService().eliminarCategoria(item.getId());
+				categoriasList.remove(item);*/
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}

@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -48,6 +49,7 @@ public class TabMedidasController {
 	
 	@FXML
 	public void initialize() {	
+		medidasTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		try {
 			medidas = ServiceLocator.getIMedidasService().listarMedidas();
 			for (MedidaItem m: medidas)
@@ -77,12 +79,10 @@ public class TabMedidasController {
 		});
 	}
 	private void cargarDB() {
-		medidas = new ArrayList<MedidaItem>();
-		medidasList.clear();
+		
 		try {
-			medidas = ServiceLocator.getIMedidasService().listarMedidas();
-			for (MedidaItem c: medidas)
-				medidasList.add(c);
+			medidasList.clear();
+			medidasList.addAll(ServiceLocator.getIMedidasService().listarMedidas());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -92,8 +92,8 @@ public class TabMedidasController {
 		if (!nombreText.getText().equals(""))
 		{
 			MedidaItem medida = new MedidaItem();
-			medida.setNombre(nombreText.getText());
-			medida.setAbreviatura(abrevText.getText());
+			medida.setNombre(abrevText.getText());
+			medida.setAbreviatura(nombreText.getText());
 
 			try {
 				ServiceLocator.getIMedidasService().crearMedida(medida);
@@ -118,23 +118,29 @@ public class TabMedidasController {
 
 	@FXML
 	public void eliminar() {
-		MedidaItem item = medidasTable.getSelectionModel().getSelectedItem();
+		ObservableList<MedidaItem> seleccionados = medidasTable.getSelectionModel().getSelectedItems();
+		//MedidaItem item = medidasTable.getSelectionModel().getSelectedItem();
+		
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Eliminar");
-		alert.setHeaderText("Eliminando " + item.getNombre());
-		alert.setContentText("¿Está seguro que desea eliminarlo?");
-
+		alert.setHeaderText("Eliminando " + seleccionados.size() + " registro(s)");
+		alert.setContentText("¿Está seguro que desea eliminarlo(s)?");
+		
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 			try {
-				ServiceLocator.getIMedidasService().eliminarMedida(item.getId());
-				medidasList.remove(item);
+				for(MedidaItem seleccionado : seleccionados){
+					System.out.println("Eliminando: " + seleccionado.getNombre());
+					ServiceLocator.getIMedidasService().eliminarMedida(seleccionado.getId());
+				}			
+				medidasList.removeAll(seleccionados);
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
 		}
 	}
+	
 	@FXML
 	public void modificar(){
 		//System.out.println("Modificando");

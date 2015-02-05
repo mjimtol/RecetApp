@@ -4,30 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.impl.TipoIngredienteService;
-import dad.recetapp.services.items.TipoAnotacionesItem;
-import dad.recetapp.services.items.TipoIngredienteItem;
-import dad.recetapp.services.items.TipoIngredienteItem;
-import dad.recetapp.services.items.TipoIngredienteItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Stage;
+import dad.recetapp.services.ServiceException;
+import dad.recetapp.services.ServiceLocator;
+import dad.recetapp.services.items.TipoIngredienteItem;
 
 public class TabIngredientesController {
 
@@ -49,6 +42,7 @@ public class TabIngredientesController {
 	
 	@FXML
 	public void initialize() {	
+		tipoIngredientesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		try {
 			tipoIngredientes = ServiceLocator.getITiposIngredientesService().listarTipoIngrediente();
 			for (TipoIngredienteItem i: tipoIngredientes)
@@ -109,18 +103,24 @@ public class TabIngredientesController {
 
 	@FXML
 	public void eliminar() {
-		TipoIngredienteItem item = tipoIngredientesTable.getSelectionModel().getSelectedItem();
+		//TipoIngredienteItem item = tipoIngredientesTable.getSelectionModel().getSelectedItem();
+		ObservableList<TipoIngredienteItem> seleccionados = tipoIngredientesTable.getSelectionModel().getSelectedItems();
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Eliminar");
-		alert.setHeaderText("Eliminando " + item.getNombre());
+		alert.setHeaderText("Eliminando " + seleccionados.size() +" registro(s)");
 		alert.setContentText("¿Está seguro que desea eliminarlo?");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 			try {
-				ServiceLocator.getITiposIngredientesService().eliminarTipoIngrediente(item.getId());
-				tipoIngredientesList.remove(item);
+				for(TipoIngredienteItem seleccionado: seleccionados){
+					System.out.println("Eliminando: "+seleccionado.getNombre());
+					ServiceLocator.getITiposIngredientesService().eliminarTipoIngrediente(seleccionado.getId());
+				}
+				tipoIngredientesList.removeAll(seleccionados);
+				/*ServiceLocator.getITiposIngredientesService().eliminarTipoIngrediente(item.getId());
+				tipoIngredientesList.remove(item);*/
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
