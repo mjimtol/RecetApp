@@ -27,7 +27,6 @@ import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.IngredienteItem;
 import dad.recetapp.services.items.InstruccionItem;
 import dad.recetapp.services.items.MedidaItem;
-import dad.recetapp.services.items.RecetaListItem;
 import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 
@@ -82,6 +81,10 @@ public class TabModRecetasController {
 		}catch(Exception e){}
 	}
 
+	@FXML public void onSeccionTextChange(){
+		parentTab.setText(seccionText.getText());
+	}
+	
 	/**************************** INSTRUCCION ****************************/
 
 	@FXML private TextField ordenText;
@@ -301,6 +304,7 @@ public class TabModRecetasController {
 
 	public void setParentTab(Tab parentTab) {
 		this.parentTab = parentTab;
+		seccionText.setText(parentTab.getText());
 	}
 	
 }

@@ -36,18 +36,26 @@ public class TabRecetasController{
 		
 	private RecetaListItem recetaSeleccionada;
 	
-	@FXML	private TableView<RecetaListItem> recetasTableView;
-	@FXML	private TableColumn<RecetaListItem, String> nombreColumn;
-	@FXML	private TableColumn<RecetaListItem, String> paraColumn;
-	@FXML	private TableColumn<RecetaListItem, String> tiempototalColumn;
-	@FXML	private TableColumn<RecetaListItem, String> fechacreacionColumn;
-	@FXML	private TableColumn<RecetaListItem, String> categoriaColumn;
-	
-	@FXML	private TextField nombreText;
-	
-	@FXML	private ComboBox<Integer> minutosCombobox;
-	@FXML	private ComboBox<Integer> segundosCombobox;
-	@FXML	private ComboBox<String> categoriaCombobox;
+	@FXML
+	private TableView<RecetaListItem> recetasTableView;
+	@FXML
+	private TableColumn<RecetaListItem, String> nombreColumn;
+	@FXML
+	private TableColumn<RecetaListItem, String> paraColumn;
+	@FXML
+	private TableColumn<RecetaListItem, String> tiempototalColumn;
+	@FXML
+	private TableColumn<RecetaListItem, String> fechacreacionColumn;
+	@FXML
+	private TableColumn<RecetaListItem, String> categoriaColumn;
+	@FXML
+	private TextField nombreText;
+	@FXML
+	private ComboBox<Integer> minutosCombobox;
+	@FXML
+	private ComboBox<Integer> segundosCombobox;
+	@FXML
+	private ComboBox<String> categoriaCombobox;
 	
 	@FXML
 	public void initialize() {	
@@ -88,18 +96,9 @@ public class TabRecetasController{
 		minutosCombobox.setValue(0);
 		
 		for (TipoAnotacionesItem c: categorias)
-			categoriaCombobox.getItems().add(c.getDescripcion());
+			categoriaCombobox.getItems().add(c.getDescripcion());	
 	}
 
-	
-	private long obtenerIdCategoria(){
-		for (TipoAnotacionesItem c : categoriasList)
-			if (c.getDescripcion().equals(categoriaCombobox.getSelectionModel().getSelectedItem()))
-				return c.getId();
-		
-		return 0;
-	}
-	
 	@FXML
 	private void nuevaReceta(){
 	    try {
@@ -232,7 +231,7 @@ public class TabRecetasController{
 		cargarDB();
 		categoriaCombobox.getItems().clear();
 		for (TipoAnotacionesItem c: categorias)
-			categoriaCombobox.getItems().add(c.getDescripcion());
+			categoriaCombobox.getItems().add(c.getDescripcion());	
 	}
 
 	public RecetaListItem getRecetaSeleccionada() {

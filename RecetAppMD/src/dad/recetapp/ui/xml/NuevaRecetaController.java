@@ -140,7 +140,7 @@ public class NuevaRecetaController {
 	@FXML
 	private void addTab() throws IOException{
 		Tab tab = new Tab();
-		tab.setText("Pene");
+		tab.setText("Nuevo");
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("TabModRecetas.fxml"));	 
 		
 		BorderPane rootPane = (BorderPane) loader.load();	    
