@@ -13,8 +13,8 @@
          <bottom>
             <FlowPane alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" hgap="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#crearButton" text="Crear" />
-                  <Button mnemonicParsing="false" onAction="#cancelarButton" text="Cancelar" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#crearButton" text="Crear" />
+                  <Button mnemonicParsing="false" onAction="#cerrarVentana" text="Cancelar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -90,14 +90,14 @@
             </HBox>
          </top>
          <center>
-            <TabPane prefHeight="211.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane fx:id="tabs" prefHeight="211.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
                 <Tab>
                   <content>
             			<fx:include fx:id="recetasdatos" source="TabModRecetas.fxml" /> 
                   </content>
                 </Tab>
-                <Tab text="+">
+                <Tab onSelectionChanged="#addTab" text="+">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>

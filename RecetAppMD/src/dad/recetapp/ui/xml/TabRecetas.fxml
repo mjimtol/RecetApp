@@ -55,7 +55,7 @@
                   <Insets />
                </FlowPane.margin>
             </Button>
-            <Button id="deleteButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Eliminar">
+            <Button id="deleteButton" mnemonicParsing="false" onAction="#eliminarReceta" prefHeight="25.0" prefWidth="74.0" text="Eliminar">
                <FlowPane.margin>
                   <Insets />
                </FlowPane.margin>

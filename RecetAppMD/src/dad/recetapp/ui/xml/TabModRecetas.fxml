@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.ui.xml.TabModRecetasController">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.ui.xml.TabModRecetasController">
    <top>
       <GridPane alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -26,20 +26,20 @@
                         <Insets />
                      </FlowPane.margin>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="seccionText" />
                </children>
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </FlowPane>
-            <Button fx:id="closeTabButton" contentDisplay="CENTER" mnemonicParsing="false" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" stylesheets="@login.css" textAlignment="CENTER" GridPane.columnIndex="1">
+            <Button fx:id="closeTabButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#DeleteTab" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" stylesheets="@login.css" textAlignment="CENTER" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
                <graphic>
                   <ImageView fx:id="closeTabImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/closeTabIcon.png" />
+                        <Image url="@../images/closeTabOverIcon.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -54,11 +54,11 @@
                <children>
                   <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <center>
-                        <TableView editable="true" BorderPane.alignment="CENTER">
+                        <TableView fx:id="ingredientesTable" editable="true" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Cantidad" />
-                              <TableColumn prefWidth="75.0" text="Medida" />
-                            <TableColumn prefWidth="75.0" text="Tipo" />
+                            <TableColumn fx:id="ingCantidadColumn" prefWidth="75.0" text="Cantidad" />
+                              <TableColumn fx:id="ingMedidaColumn" prefWidth="75.0" text="Medida" />
+                            <TableColumn fx:id="ingTipoColumn" prefWidth="75.0" text="Tipo" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -141,10 +141,10 @@
                         </FlowPane>
                      </bottom>
                      <center>
-                        <TableView editable="true" BorderPane.alignment="CENTER">
+                        <TableView fx:id="instruccionsTable" editable="true" BorderPane.alignment="CENTER">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Orden" />
-                              <TableColumn prefWidth="75.0" text="Descripcion" />
+                              <TableColumn fx:id="insOrdenColumn" prefWidth="75.0" text="Orden" />
+                              <TableColumn fx:id="insDescripcionColumn" prefWidth="75.0" text="Descripcion" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
