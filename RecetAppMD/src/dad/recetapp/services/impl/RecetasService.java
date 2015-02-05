@@ -178,6 +178,7 @@ public class RecetasService implements IRecetasService {
 		}
 		
 		ResultSet rs = sentencia.executeQuery();
+		System.out.println(sentencia);
 		while (rs.next()) {
 			recetas.add(resultSetToListItem(rs));
 		}
@@ -186,6 +187,7 @@ public class RecetasService implements IRecetasService {
 	} catch (SQLException e) {
 		throw new ServiceException("Error al buscar recetas: " + e.getMessage());
 	}			
+	
 	return recetas;
 	}
 

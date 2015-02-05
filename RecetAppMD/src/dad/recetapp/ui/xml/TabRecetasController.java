@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
+import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.RecetaListItem;
 import dad.recetapp.services.items.TipoAnotacionesItem;
 
@@ -178,7 +179,34 @@ public class TabRecetasController{
         	e.printStackTrace();
         }
 	}
-	
+	@FXML
+	public void buscarReceta(){
+		Long idCategoria = obtenerIdCategoria();
+		recetas = new ArrayList<RecetaListItem>();
+		recetasList.clear();
+		try{
+			String nombreReceta = nombreText.getText();
+			if(nombreReceta.equals(""))
+				nombreReceta = null;
+			Integer tiempoReceta = (minutosCombobox.getValue()*60)+(segundosCombobox.getValue());
+			if(tiempoReceta==0)
+				tiempoReceta=null;
+			if(idCategoria==0)
+				idCategoria=null;
+			recetas = ServiceLocator.getIRecetasService().buscarRecetas(nombreReceta, tiempoReceta,idCategoria );
+			for (RecetaListItem r: recetas)
+				recetasList.add(r);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	private long obtenerIdCategoria(){
+		for (TipoAnotacionesItem c : categoriasList)
+			if (c.getDescripcion().equals(categoriaCombobox.getSelectionModel().getSelectedItem()))
+				return c.getId();
+		
+		return 0;
+	}
 	@FXML
 	public void cargarDB() {
 		recetas = new ArrayList<RecetaListItem>();

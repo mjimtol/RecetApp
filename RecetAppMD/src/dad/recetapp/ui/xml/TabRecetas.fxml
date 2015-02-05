@@ -31,7 +31,7 @@
             <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="5.0" prefWrapLength="200.0" vgap="5.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Nombre: " />
-                  <TextField id="nombreTxt" fx:id="nombreText" prefHeight="25.0" prefWidth="131.0" />
+                  <TextField id="nombreTxt" fx:id="nombreText" onKeyReleased="#buscarReceta" prefHeight="25.0" prefWidth="131.0" />
                   <Label text="Hasta: " />
                   <ComboBox fx:id="minutosCombobox" prefHeight="25.0" prefWidth="70.0" />
                   <Label text="M " />
