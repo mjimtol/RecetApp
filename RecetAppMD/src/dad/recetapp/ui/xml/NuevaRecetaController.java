@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,6 +17,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import dad.recetapp.services.ServiceException;
@@ -24,6 +31,7 @@ import dad.recetapp.services.items.TipoAnotacionesItem;
 public class NuevaRecetaController {
 	 	
 	@FXML	private TabPane tabs;
+	@FXML	private Tab addTab;	
 	
 	@FXML	private TextField nombreText;
 	@FXML	private TextField paraText;
@@ -35,12 +43,26 @@ public class NuevaRecetaController {
 	@FXML	private ComboBox<String> paraCombo;
 	@FXML	private ComboBox<String> categoriaCombo;
 	
-	@FXML	private Button addButton;
+	@FXML	private Button addButton;	
 	
 	private TabRecetasController recetasController;
 	
 	@FXML
 	public void initialize() {
+		//Imagen + en pestaña y evento para añadir nuevas
+		Image imagen = new Image(getClass().getResourceAsStream("../images/addTabIcon.png"));
+		ImageView iv = new ImageView(imagen);
+				
+		addTab.setGraphic(iv);
+				
+		tabs.setOnMouseClicked(new EventHandler<MouseEvent>()	{
+			@Override
+			public void handle(MouseEvent e) {
+				if ( tabs.getSelectionModel().getSelectedItem().equals(addTab) )
+					try {	addTab();	} catch (IOException ex) {ex.printStackTrace();}
+			}
+		});
+
 		rellenarCombos();
 		cargarDB();	
 	}
@@ -140,7 +162,8 @@ public class NuevaRecetaController {
 	@FXML
 	private void addTab() throws IOException{
 		Tab tab = new Tab();
-		tab.setText("Nuevo");
+		tab.setText("Nuevo");		
+		
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("TabModRecetas.fxml"));	 
 		
 		BorderPane rootPane = (BorderPane) loader.load();	    
@@ -148,7 +171,7 @@ public class NuevaRecetaController {
 		TabModRecetasController controller = loader.getController();
 		controller.setRecetaController(this);
 		controller.setParentTab(tab);
-		
+
 		tabs.getTabs().add(tab);
 		tab.setContent((Node)rootPane);
 	}
