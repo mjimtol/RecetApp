@@ -23,34 +23,26 @@ import dad.recetapp.services.items.TipoAnotacionesItem;
 
 public class NuevaRecetaController {
 	 	
-	@FXML
-	private TabPane tabs;
+	@FXML	private TabPane tabs;
 	
-	@FXML
-	private TextField nombreText;
-	@FXML
-	private TextField paraText;
-	@FXML
-	private ComboBox<Integer> minutosTotalCombo;
-	@FXML
-	private ComboBox<Integer> segundosTotalCombo;
-	@FXML
-	private ComboBox<Integer> minutosThermomixCombo;
-	@FXML
-	private ComboBox<Integer> segundosThermomixCombo;
-	@FXML
-	private ComboBox<String> paraCombo;
-	@FXML
-	private ComboBox<String> categoriaCombo;
-	@FXML
-	private Button addButton;
+	@FXML	private TextField nombreText;
+	@FXML	private TextField paraText;
+	
+	@FXML	private ComboBox<Integer> minutosTotalCombo;
+	@FXML	private ComboBox<Integer> segundosTotalCombo;
+	@FXML	private ComboBox<Integer> minutosThermomixCombo;
+	@FXML	private ComboBox<Integer> segundosThermomixCombo;
+	@FXML	private ComboBox<String> paraCombo;
+	@FXML	private ComboBox<String> categoriaCombo;
+	
+	@FXML	private Button addButton;
 	
 	private TabRecetasController recetasController;
 	
 	@FXML
 	public void initialize() {
 		rellenarCombos();
-		cargarDB();		
+		cargarDB();	
 	}
 		
 	private void rellenarCombos() {

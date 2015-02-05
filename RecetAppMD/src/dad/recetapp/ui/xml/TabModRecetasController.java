@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,56 +27,50 @@ import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.IngredienteItem;
 import dad.recetapp.services.items.InstruccionItem;
 import dad.recetapp.services.items.MedidaItem;
+import dad.recetapp.services.items.RecetaListItem;
 import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 
 public class TabModRecetasController {
 
-	@FXML
-	private Parent root;
+	@FXML	private Parent root;
 	
-	@FXML
-	private TextField seccionText;
-	@FXML
-	private ImageView closeTabImage;
-	@FXML
-	private Button closeTabButton;
+	@FXML	private TextField seccionText;
+	@FXML	private ImageView closeTabImage;
+	@FXML	private Button closeTabButton;
 	
-	@FXML
-	private TableView<MedidaItem> ingredientesTable;
-	@FXML
-	private TableColumn<TipoIngredienteItem, String> ingCantidadColumn;
-	@FXML
-	private TableColumn<TipoIngredienteItem, String> ingMedidaColumn;
-	@FXML
-	private TableColumn<TipoIngredienteItem, String> ingTipoColumn;
+	@FXML	private TableView<IngredienteItem> ingredientesTable;
+	@FXML	private TableColumn<IngredienteItem, String> ingCantidadColumn;
+	@FXML	private TableColumn<IngredienteItem, String> ingMedidaColumn;
+	@FXML	private TableColumn<IngredienteItem, String> ingTipoColumn;
 
-	@FXML
-	private TableView<MedidaItem> instruccionsTable;
-	@FXML
-	private TableColumn<TipoAnotacionItem, String> insOrdenColumn;
-	@FXML
-	private TableColumn<TipoAnotacionItem, String> insDescripcionColumn;
+	@FXML	private TableView<TipoAnotacionItem> instruccionsTable;
+	@FXML	private TableColumn<TipoAnotacionItem, String> insOrdenColumn;
+	@FXML	private TableColumn<TipoAnotacionItem, String> insDescripcionColumn;
 
-	private Stage stage;	
-	
+	private Stage stage;
 	private NuevaRecetaController recetasController;
-	
 	private Tab parentTab;
+	
+	private List<IngredienteItem> ingredientes = new ArrayList<IngredienteItem>();
+	private ObservableList<IngredienteItem> ingredientesTableList = FXCollections.observableList(ingredientes);
 	
 	@FXML
 	public void initialize() {
 		try{
+			ingredientesTable.setItems(ingredientesTableList);
+			ingredientesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+			
 			closeTabButton.setBackground(Background.EMPTY);
 			
-			ingCantidadColumn.setCellValueFactory(new PropertyValueFactory<TipoIngredienteItem, String>("cantidad"));
-			ingCantidadColumn.setCellFactory(TextFieldTableCell.<TipoIngredienteItem>forTableColumn());
+			ingCantidadColumn.setCellValueFactory(new PropertyValueFactory<IngredienteItem, String>("cantidad"));
+			ingCantidadColumn.setCellFactory(TextFieldTableCell.<IngredienteItem>forTableColumn());
 			
-			ingMedidaColumn.setCellValueFactory(new PropertyValueFactory<TipoIngredienteItem, String>("id_medida"));
-			ingMedidaColumn.setCellFactory(TextFieldTableCell.<TipoIngredienteItem>forTableColumn());
+			ingMedidaColumn.setCellValueFactory(new PropertyValueFactory<IngredienteItem, String>("id_medida"));
+			ingMedidaColumn.setCellFactory(TextFieldTableCell.<IngredienteItem>forTableColumn());
 			
-			ingTipoColumn.setCellValueFactory(new PropertyValueFactory<TipoIngredienteItem, String>("id_tipo"));
-			ingTipoColumn.setCellFactory(TextFieldTableCell.<TipoIngredienteItem>forTableColumn());
+			ingTipoColumn.setCellValueFactory(new PropertyValueFactory<IngredienteItem, String>("id_tipo"));
+			ingTipoColumn.setCellFactory(TextFieldTableCell.<IngredienteItem>forTableColumn());
 			
 			
 			insOrdenColumn.setCellValueFactory(new PropertyValueFactory<TipoAnotacionItem, String>("descripcion"));
@@ -154,8 +149,7 @@ public class TabModRecetasController {
 			e.printStackTrace();
 		}
 		
-	}
-	
+	}	
 	
 	/*******/
 	
@@ -173,9 +167,9 @@ public class TabModRecetasController {
 	@FXML
 	private TextField cantidadText;
 	@FXML
-	private ComboBox<MedidaItem> medidaCombo;
+	private ComboBox<String> medidaCombo;
 	@FXML
-	private ComboBox<TipoIngredienteItem> tipoCombo = new ComboBox<TipoIngredienteItem>();
+	private ComboBox<String> tipoCombo;// = new ComboBox<TipoIngredienteItem>();
 	
 	private List<TipoIngredienteItem> tipoIngredientes = new ArrayList<TipoIngredienteItem>();
 	private ObservableList<TipoIngredienteItem> tipoIngredientesList = FXCollections.observableList(tipoIngredientes);
@@ -185,8 +179,8 @@ public class TabModRecetasController {
 	
 	@FXML
 	private void AddIngrediente(){		
-		try{
-			cargarDBIngredientes();		
+		ServiceLocator.getIRecetasService();		
+		try{			
 			stage = new Stage();
 			stage.setTitle("Nuevo ingrediente para " + seccionText.getText());
 			stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
@@ -194,12 +188,23 @@ public class TabModRecetasController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
-				
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	@FXML private void cargarCombos(){		
+		if (tipoCombo.getItems().size() == 0 && medidaCombo.getItems().size() == 0)
+		{
+			cargarDBIngredientes();
+			for (TipoIngredienteItem i : tipoIngredientesList)
+				tipoCombo.getItems().add(i.getNombre());
+			for (MedidaItem m: medidasList)
+			medidaCombo.getItems().add(m.getNombre());
+		}
+	}
+	
 	@FXML
 	private void EditIngrediente(){
 		try{
@@ -225,61 +230,54 @@ public class TabModRecetasController {
 		IngredienteItem ingrediente = new IngredienteItem();
 		
 		ingrediente.setCantidad(Integer.parseInt(cantidadText.getText()));
-		ingrediente.setMedida(medidaCombo.getSelectionModel().getSelectedItem());
+		MedidaItem medida = (MedidaItem) getItems(1,medidaCombo.getSelectionModel().getSelectedItem());
 		
-		TipoIngredienteItem tipoIng = new TipoIngredienteItem();
-		tipoIng.setNombre(tipoCombo.getSelectionModel().getSelectedItem().getNombre());
-		tipoIng.setId(tipoCombo.getSelectionModel().getSelectedItem().getId());
+		ingrediente.setMedida(medida);
 		
-		ingrediente.setTipo(tipoIng);
+		TipoIngredienteItem tipoIng = (TipoIngredienteItem) getItems(2,tipoCombo.getSelectionModel().getSelectedItem());
+		
+		ingrediente.setTipo(tipoIng);		
 		
 //		try {
 //			ServiceLocator.getITiposIngredientesService().crearTipoIngrediente(tipoIngrediente);
 //		} catch (ServiceException e) {
 //			e.printStackTrace();
 //		}
+		
+		ingredientesTableList.add(ingrediente);
+		
+		System.out.println(ingrediente.getCantidad() + ", " + ingrediente.getMedida().getNombre() + ", " + ingrediente.getTipo().getNombre());
+		cerrar();
 	}
 	
-	private void cargarDBIngredientes() {
-//		tipoIngredientes = new ArrayList<TipoIngredienteItem>();
-//		tipoIngredientesList.clear();
-//		medidas = new ArrayList<MedidaItem>();
-//		medidasList.clear();
-//		try {
-//			tipoIngredientes = ServiceLocator.getITiposIngredientesService().listarTipoIngrediente();
-//			for (TipoIngredienteItem c: tipoIngredientes)
-//			{	tipoIngredientesList.add(c);	}
-//			medidas = ServiceLocator.getIMedidasService().listarMedidas();
-//			for (MedidaItem m: medidas)
-//			{	medidasList.add(m);		}			
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		}
-//		tipoCombo.getItems().addAll(tipoIngredientesList);
-//		medidaCombo.getItems().addAll(medidasList);
+	private Object getItems(int tipo, String nombre){
+		if (tipo == 1)
+		{
+			for (MedidaItem m : medidasList)
+				if (m.getNombre().equals(nombre))
+					return m;
+		}
+		else
+		{
+			for (TipoIngredienteItem i : tipoIngredientesList)
+				if (i.getNombre().equals(nombre))
+					return i;
+		}
 		
-		
-
-		List<MedidaItem> categorias = new ArrayList<MedidaItem>(); 
-		try { 
-			categorias = ServiceLocator.getIMedidasService().listarMedidas(); 
-		} catch (ServiceException e) { 
-//			Logs.log(e); 
-		} 
-		medidasList = FXCollections.observableArrayList(); 
-		medidasList.addAll(categorias); 
-
-
-		List<TipoIngredienteItem> tipoIngredientes = new ArrayList<TipoIngredienteItem>(); 
-		try { 
-			tipoIngredientes = ServiceLocator.getITiposIngredientesService().listarTipoIngrediente(); 
-		} catch (ServiceException e) { 
-//			Logs.log(e); 
-		} 
-		tipoIngredientesList = FXCollections.observableArrayList(); 
-		tipoIngredientesList.addAll(tipoIngredientes); 
-
-		tipoCombo.getItems().addAll(tipoIngredientesList);
+		return null;
+	}
+	
+	private void cargarDBIngredientes() {		
+		try {
+			List<TipoIngredienteItem> tipoIngredientes = ServiceLocator.getITiposIngredientesService().listarTipoIngrediente();  
+			for (TipoIngredienteItem t: tipoIngredientes)
+				tipoIngredientesList.add(t);
+			List <MedidaItem> medidas = ServiceLocator.getIMedidasService().listarMedidas();
+			for (MedidaItem m: medidas)
+			{	medidasList.add(m);	}			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/****/

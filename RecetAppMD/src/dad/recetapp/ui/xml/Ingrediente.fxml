@@ -35,8 +35,8 @@
                </GridPane.margin>
             </Label>
             <TextField id="canText" fx:id="cantidadText" GridPane.columnIndex="1" />
-            <ComboBox id="medCombo" fx:id="medidaCombo" prefHeight="25.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox id="tipoCombo" fx:id="tipoCombo" prefHeight="25.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox id="medCombo" fx:id="medidaCombo" onMouseClicked="#cargarCombos" prefHeight="25.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox id="tipoCombo" fx:id="tipoCombo" onMouseClicked="#cargarCombos" prefHeight="25.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -44,13 +44,13 @@
       </GridPane>
    </center>
    <bottom>
-      <FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="37.0" prefWidth="395.0" BorderPane.alignment="CENTER">
+      <FlowPane alignment="BOTTOM_RIGHT" hgap="5.0" BorderPane.alignment="CENTER">
          <children>
             <Button id="guardarButton" mnemonicParsing="false" onAction="#guardarIngrediente" text="Guardar cambios" />
             <Button id="cancelarButton" mnemonicParsing="false" onAction="#cerrar" text="Cancelar" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="5.0" right="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
       </FlowPane>
    </bottom>

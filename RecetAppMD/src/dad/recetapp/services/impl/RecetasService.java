@@ -422,7 +422,7 @@ public class RecetasService implements IRecetasService {
 			sentencia.close();		
 		} catch (SQLException e) {
 			throw new ServiceException("Error al crear la instruccion nº '" + instruccion.getOrden() + "': " + e.getMessage());
-		}	
+		}
 	}
 
 	
